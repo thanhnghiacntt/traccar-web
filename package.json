@@ -1,0 +1,20 @@
+{
+    "name": "traccar-web",
+    "dependencies": {
+      "extjs-gpl": "^6.2.0",
+      "ol": "^6.12.0",
+      "ol-layerswitcher": "^3.8.3",
+      "openlayers-dist": "^6.12.0",
+      "proj4": "^2.7.5"
+    },
+    "devDependencies": {
+      "eslint": "^4.4.1",
+      "shx": "^0.3.3"
+    },
+    "scripts": {
+      "postinstall": "shx mkdir -p src/lib/ol && shx mkdir -p src/lib/ol-layerswitcher && shx mkdir -p src/lib/proj4 && shx mkdir -p src/lib/extjs && shx cp node_modules/ol/dist/ol.js src/lib/ol/ && shx cp node_modules/ol/ol.css src/lib/ol/ && shx cp node_modules/ol-layerswitcher/dist/ol-layerswitcher.js src/lib/ol-layerswitcher/ && shx cp node_modules/ol-layerswitcher/dist/ol-layerswitcher.css src/lib/ol-layerswitcher/ && shx cp node_modules/proj4/dist/proj4.js src/lib/proj4/ && shx cp node_modules/extjs-gpl/build/ext-all.js src/lib/extjs/ && shx mkdir -p src/lib/extjs/classic && shx cp -r node_modules/extjs-gpl/build/classic/locale src/lib/extjs/classic/locale && shx cp -r node_modules/extjs-gpl/build/classic/theme-triton src/lib/extjs/classic/theme-triton && shx mkdir -p src/lib/extjs/packages/charts && shx cp -r node_modules/extjs-gpl/build/packages/charts/classic src/lib/extjs/packages/charts/classic",
+      "build": "sencha compile --classpath=src/app.js,src/app,node_modules/extjs-gpl/packages/core/src,node_modules/extjs-gpl/packages/core/overrides,node_modules/extjs-gpl/classic/classic/src,node_modules/extjs-gpl/classic/classic/overrides exclude -all and include -recursive -file src/app.js and exclude -namespace=Ext and concatenate -closure src/app.min.js",
+      "lint": "./node_modules/.bin/eslint src/."
+    }
+  }
+  
