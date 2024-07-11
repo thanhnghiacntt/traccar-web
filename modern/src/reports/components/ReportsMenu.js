@@ -106,6 +106,12 @@ const ReportsMenu = () => {
           icon={<PlayArrow />}
           selected={location.pathname === '/reports/cameravideo'}
         />
+        <MenuItem
+          title={t('totalMonthReport')}
+          link="/reports/totalmonthreport"
+          icon={<PlayArrow />}
+          selected={location.pathname === '/reports/totalmonthreport'}
+        />
       </List>
       <List>
         <Divider />
