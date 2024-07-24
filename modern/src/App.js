@@ -9,7 +9,7 @@ import SocketController from './SocketController';
 import CachingController from './CachingController';
 import { useEffectAsync } from './reactHelper';
 import { sessionActions } from './store';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import ToolbarEx from './common/components/ToolbarEx';
 
 const useStyles = makeStyles(() => ({
   page: {
@@ -52,6 +52,7 @@ const App = () => {
     <>
       <SocketController />
       <CachingController />
+      <ToolbarEx />
       <nav className={`navbar navbar-expand-lg navbar-light ${classes.navbar} fixed-top`}>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon" />
