@@ -30,9 +30,10 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('md')]: {
       position: 'fixed',
       left: 0,
-      top: 60,
-      height: `calc(100% - ${theme.spacing(6)})`,
+      top: 0,
+      height: `calc(100% - ${theme.spacing(3)})`,
       width: theme.dimensions.drawerWidthDesktop,
+      margin: theme.spacing(1.5),
       zIndex: 3,
     },
     [theme.breakpoints.down('md')]: {
