@@ -629,7 +629,8 @@
     "fuelType": "Type",
     "spentFuelByDistance" : "Fuel spent(L)",
     "spentPrice": "Total amount",
-    "reportCameraImage":"Camera image",
+    "reportConcoxImage":"Camera Concox image",
+    "reportStreamaxImage":"Camera Stream image",
     "reportCameraVideo":"Camera video",
     "mediaImage":"Image",
     "videoch1":"Chanel 1",
@@ -649,7 +650,26 @@
     "totalStopTime": "Total stop time",
     "totalStops": "Stop time count",
     "userDevices" :"All devices",
-    "action":"Actions"
+    "action":"Actions",
+    "toobarExMap":"Map",
+    "toobarExHistory":"History",
+    "toobarExManager":"Manager",
+    "toobarExComReport":"Company reports",
+    "toobarExGovReport":"QCVN31 reports",
+    "toobarExSupport":"Help",
+    "barInfor":"Infomation",
+    "barHistory":"History",
+    "barImage":"Image",
+    "barVideo":"Video",
+    "devDmvrTitle":"Setting DMVR",
+    "devDmvrImei":"DMVR Imei",
+    "devDmvrChannels": "Channels",
+    "devDmvrSim":"DMVR Sim",
+    "modelName":"Model type",
+    "modelCode":"Model code",
+    "modelPort":"TCP port",
+    "modeSMS":"SMS commands",
+    "simType":"SIM Type"
 
 
 }

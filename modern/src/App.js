@@ -9,7 +9,6 @@ import SocketController from './SocketController';
 import CachingController from './CachingController';
 import { useEffectAsync } from './reactHelper';
 import { sessionActions } from './store';
-import ToolbarEx from './common/components/ToolbarEx';
 
 const useStyles = makeStyles(() => ({
   page: {
@@ -49,7 +48,6 @@ const App = () => {
     <>
       <SocketController />
       <CachingController />
-      <ToolbarEx />
       <div className={classes.page}>
         <Outlet />
       </div>
