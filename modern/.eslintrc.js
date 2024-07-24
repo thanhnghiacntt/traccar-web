@@ -1,4 +1,4 @@
-module.exports = {
+`module.exports = {
   extends: 'airbnb',
   parserOptions: {
     ecmaVersion: 2020,
@@ -28,6 +28,6 @@ module.exports = {
     'react/jsx-props-no-spreading': [0],
     'jsx-a11y/anchor-is-valid': [0],
     'no-console': 'off',
-	'linebreak-style': 0, // ThÃªm dÃ²ng nÃ y
+	'linebreak-style': 0, // Thêm dòng này
   },
 };
