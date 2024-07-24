@@ -7,9 +7,10 @@ import theme from './common/theme';
 import BottomMenu from './common/components/BottomMenu';
 import SocketController from './SocketController';
 import CachingController from './CachingController';
+import Header from './Header';
 import { useEffectAsync } from './reactHelper';
 import { sessionActions } from './store';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import ToolbarEx from './common/components/ToolbarEx';
 
 const useStyles = makeStyles(() => ({
   page: {
@@ -18,9 +19,6 @@ const useStyles = makeStyles(() => ({
   },
   menu: {
     zIndex: 1204,
-  },
-  navbar: {
-    backgroundColor: '#0959a1',
   },
 }));
 
@@ -52,21 +50,7 @@ const App = () => {
     <>
       <SocketController />
       <CachingController />
-      <nav className={`navbar navbar-expand-lg navbar-light ${classes.navbar} fixed-top`}>
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon" />
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <a className="nav-link" href="#">Bản đồ</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">Báo cáo</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
+      <ToolbarEx />
       <div className={classes.page}>
         <Outlet />
       </div>

@@ -101,7 +101,7 @@ const CameraImageReportPage = () => {
   const [openDialog, setOpenDialog] = React.useState(false);
   const handleImageClick = (item) => {
     setOpenDialog(true);
-    const url = `https://www.vngts.com/api/media/${devices[item.deviceId]?.uniqueId}/${item.attributes.file}`;
+    const url = `/api/media/${devices[item.deviceId]?.uniqueId}/${item.attributes.file}`;
     setSelectedImage(url);
   };
 
@@ -145,8 +145,8 @@ const CameraImageReportPage = () => {
                 <div key={item.id}>
                   <ImageListItem>
                     <img
-                      src={`https://www.vngts.com/api/media/${devices[item.deviceId]?.uniqueId}/${item.attributes.file}?w=196&fit=crop&auto=format`}
-                      srcSet={`https://www.vngts.com/api/media/${devices[item.deviceId]?.uniqueId}/${item.attributes.file}?w=196&fit=crop&auto=format&dpr=2 2x`}
+                      src={`/api/media/${devices[item.deviceId]?.uniqueId}/${item.attributes.file}?w=196&fit=crop&auto=format`}
+                      srcSet={`/api/media/${devices[item.deviceId]?.uniqueId}/${item.attributes.file}?w=196&fit=crop&auto=format&dpr=2 2x`}
                       alt=""
                       loading="lazy"
                     />

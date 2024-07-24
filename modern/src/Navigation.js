@@ -7,6 +7,7 @@ import { LinearProgress } from '@mui/material';
 import MainPage from './main/MainPage';
 import CombinedReportPage from './reports/CombinedReportPage';
 import RouteReportPage from './reports/RouteReportPage';
+import TotalMonthReport from './reports/TotalMonthReport';
 import ServerPage from './settings/ServerPage';
 import UsersPage from './settings/UsersPage';
 import DevicePage from './settings/DevicePage';
@@ -55,7 +56,6 @@ import LoginPage from './login/LoginPage';
 import RegisterPage from './login/RegisterPage';
 import ResetPasswordPage from './login/ResetPasswordPage';
 import GeofencesPage from './other/GeofencesPage';
-import TollstationsMapPage from './other/TollstationsPage';
 import LiveCamera from './camera/LiveCamera';
 import GeofencePage from './settings/GeofencePage';
 import useQuery from './common/util/useQuery';
@@ -126,7 +126,6 @@ const Navigation = () => {
         <Route path="event/:id" element={<EventPage />} />
         <Route path="replay" element={<ReplayPage />} />
         <Route path="geofences" element={<GeofencesPage />} />
-        <Route path="tollstations" element={<TollstationsMapPage />} />
         <Route path="livecamera" element={<LiveCamera />} />
 
         <Route path="settings">
@@ -200,7 +199,7 @@ const Navigation = () => {
           <Route path="statistics" element={<StatisticsPage />} />
           <Route path="cameraimage" element={<CameraImageReportPage />} />
           <Route path="cameravideo" element={<CameraVideoReportPage />} />
-
+          <Route path="totalmonthreport" element={<TotalMonthReport />} />
         </Route>
       </Route>
     </Routes>

@@ -112,7 +112,7 @@ const TollstationsPage = () => {
             <Typography variant="h6" className={classes.title}>{t('sysTollstation')}</Typography>
             <label htmlFor="upload-gpx">
               <input accept=".gpx" id="upload-gpx" type="file" className={classes.fileInput} onChange={handleFile} />
-              <IconButton edge="end" component="span" onClick={() => {}}>
+              <IconButton edge="end" component="span">
                 <UploadFileIcon />
               </IconButton>
             </label>
