@@ -81,28 +81,8 @@ const ToolbarEx = () => {
   const dispatch = useDispatch();
   const theme = useTheme();
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const [anchorElReport, setAnchorElReport] = useState(null);
-
-  const openUserMenu = Boolean(anchorElUser);
-  const openReportPopover = Boolean(anchorElReport);
-  const userMenuId = openUserMenu ? 'user-menu' : undefined;
-  const reportPopoverId = openReportPopover ? 'report-popover' : undefined;
-
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
-  };
-
-  const handleOpenReportPopover = (event) => {
-    setAnchorElReport(event.currentTarget);
-  };
-
-  const handleCloseReportPopover = () => {
-    setAnchorElReport(null);
-  };
-
-  const handleNavigate = (path) => {
-    navigate(path);
-    handleCloseReportPopover();
   };
 
   const handleCloseUserMenu = () => {
@@ -221,36 +201,21 @@ const ToolbarEx = () => {
         </ListItem>
         <ListItem disablePadding>
           <Button
-            onClick={() => handleOpenReportPopover}
+            onClick={() => handleSelection('reportGTVT')}
             variant="text"
             size="small"
             className={classes.linkButton}>
-            {t('toobarExReport')}
+            {t('toobarExReportGTVT')}
           </Button>
-          <Popover
-            id={reportPopoverId}
-            open={openReportPopover}
-            anchorEl={anchorElReport}
-            onClose={handleCloseReportPopover}
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'left',
-            }}
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'left',
-            }}
-            disableRestoreFocus
-          >
-            <Menu>
-              <MenuItem onClick={() => handleNavigate('/reports/business')}>
-                {t('toobarExReportBusiness')}
-              </MenuItem>
-              <MenuItem onClick={() => handleNavigate('/reports/gtvt')}>
-                {t('toobarExReportGTVT')}
-              </MenuItem>
-            </Menu>
-          </Popover>
+        </ListItem>
+        <ListItem disablePadding>
+          <Button
+            onClick={() => handleSelection('reportBusiness')}
+            variant="text"
+            size="small"
+            className={classes.linkButton}>
+            {t('toobarExReportBusiness')}
+          </Button>
         </ListItem>
         <ListItem disablePadding>
           <Button
@@ -298,7 +263,7 @@ const ToolbarEx = () => {
         </Tooltip>
         <Menu
           sx={{ mt: '45px' }}
-          id={userMenuId}
+          id="menu-appbar"
           anchorEl={anchorElUser}
           anchorOrigin={{
             vertical: 'top',
