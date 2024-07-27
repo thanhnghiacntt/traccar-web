@@ -54,6 +54,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     textTransform: 'none',
     color: grey[50],
+    whiteSpace: 'nowrap',
     '&:hover': {
       backgroundColor: green[200],
       textDecoration: 'underline',
@@ -66,10 +67,17 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     textTransform: 'none',
     color: grey[50],
+    whiteSpace: 'nowrap',
     '&:hover': {
       backgroundColor: green[200],
       textDecoration: 'underline',
 
+    },
+    listItem: {
+      display: 'flex',
+      justifyContent: 'center',
+      flex: 1,
+      width: 'auto',
     },
   },
 }));
@@ -88,7 +96,7 @@ const ToolbarEx = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  const classes = useStyles();
+  const classes = useStyles(theme);
   // const theme = useTheme();
   const handleLogout = async () => {
     setAnchorElUser(null);
@@ -179,9 +187,10 @@ const ToolbarEx = () => {
       bgcolor: theme.palette.colors.toolbar,
       borderRadius: '8px',
       width: '100%',
+      justifyContent: 'space-between',
     }}>
-      <List style={{ display: 'flex', width: '100%', marginLeft: '10px', background: theme.palette.colors.toolbar }}>
-        <ListItem disablePadding>
+      <List style={{ display: 'flex', width: '100%', marginLeft: '10px', background: theme.palette.colors.toolbar, justifyContent: 'space-between' }}>
+        <ListItem disablePadding className={classes.listItem}>
           <Button
             onClick={() => handleSelection('map')}
             variant="text"
@@ -190,7 +199,7 @@ const ToolbarEx = () => {
             {t('toobarExMap')}
           </Button>
         </ListItem>
-        <ListItem disablePadding>
+        <ListItem disablePadding className={classes.listItem}>
           <Button
             onClick={() => handleSelection('camera')}
             variant="text"
@@ -199,7 +208,7 @@ const ToolbarEx = () => {
             {t('toobarExCamera')}
           </Button>
         </ListItem>
-        <ListItem disablePadding>
+        <ListItem disablePadding className={classes.listItem}>
           <Button
             onClick={() => handleSelection('reportGTVT')}
             variant="text"
@@ -208,7 +217,7 @@ const ToolbarEx = () => {
             {t('toobarExReportGTVT')}
           </Button>
         </ListItem>
-        <ListItem disablePadding>
+        <ListItem disablePadding className={classes.listItem}>
           <Button
             onClick={() => handleSelection('reportBusiness')}
             variant="text"
@@ -217,7 +226,7 @@ const ToolbarEx = () => {
             {t('toobarExReportBusiness')}
           </Button>
         </ListItem>
-        <ListItem disablePadding>
+        <ListItem disablePadding className={classes.listItem}>
           <Button
             onClick={() => handleSelection('history')}
             variant="text"
@@ -226,7 +235,7 @@ const ToolbarEx = () => {
             {t('toobarExHistory')}
           </Button>
         </ListItem>
-        <ListItem disablePadding>
+        <ListItem disablePadding className={classes.listItem}>
           <Button
             onClick={() => handleSelection('comreport')}
             variant="text"
@@ -235,7 +244,7 @@ const ToolbarEx = () => {
             {t('toobarExComReport')}
           </Button>
         </ListItem>
-        <ListItem disablePadding>
+        <ListItem disablePadding className={classes.listItem}>
           <Button
             onClick={() => handleSelection('manager')}
             variant="text"
@@ -244,7 +253,7 @@ const ToolbarEx = () => {
             {t('toobarExManager')}
           </Button>
         </ListItem>
-        <ListItem disablePadding>
+        <ListItem disablePadding className={classes.listItem}>
           <Button
             onClick={handleClick}
             variant="text"
