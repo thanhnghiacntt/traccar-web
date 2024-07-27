@@ -53,11 +53,11 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'Arial',
     fontWeight: 'bold',
     textTransform: 'none',
-    color: grey[600],
+    color: grey[50],
     '&:hover': {
       backgroundColor: green[200],
       textDecoration: 'underline',
-      color: green[600],
+      color: grey[50],
     },
   },
   linkButtonActive: {
@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'Arial',
     fontWeight: 'bold',
     textTransform: 'none',
-    color: green[900],
+    color: grey[50],
     '&:hover': {
       backgroundColor: green[200],
       textDecoration: 'underline',
@@ -80,10 +80,29 @@ const ToolbarEx = () => {
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const theme = useTheme();
-
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const [anchorElReport, setAnchorElReport] = useState(null);
+
+  const openUserMenu = Boolean(anchorElUser);
+  const openReportPopover = Boolean(anchorElReport);
+  const userMenuId = openUserMenu ? 'user-menu' : undefined;
+  const reportPopoverId = openReportPopover ? 'report-popover' : undefined;
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
+  };
+
+  const handleOpenReportPopover = (event) => {
+    setAnchorElReport(event.currentTarget);
+  };
+
+  const handleCloseReportPopover = () => {
+    setAnchorElReport(null);
+  };
+
+  const handleNavigate = (path) => {
+    navigate(path);
+    handleCloseReportPopover();
   };
 
   const handleCloseUserMenu = () => {
@@ -132,6 +151,9 @@ const ToolbarEx = () => {
       case 'camera':
         navigate('/livecamera');
         break;
+      case 'report':
+        navigate('/report');
+        break;
       case 'history':
         navigate('/replay');
         break;
@@ -169,100 +191,100 @@ const ToolbarEx = () => {
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
   return (
-    <Box
-      sx={{
-        flexGrow: 1,
-        display: { xs: 'none', md: 'flex' },
-        alignItems: 'center',
-        textAlign: 'center',
-        bgcolor: theme.palette.colors.toolbar,
-        borderRadius: '8px',
-        width: '100%',
-      }}
-    >
+    <Box sx={{
+      flexGrow: 1,
+      display: { xs: 'none', md: 'flex' },
+      alignItems: 'center',
+      textAlign: 'center',
+      bgcolor: theme.palette.colors.toolbar,
+      borderRadius: '8px',
+      width: '100%',
+    }}>
       <List style={{ display: 'flex', width: '100%', marginLeft: '10px', background: theme.palette.colors.toolbar }}>
-        <ListItem
-          disablePadding
-        >
+        <ListItem disablePadding>
           <Button
             onClick={() => handleSelection('map')}
             variant="text"
             size="small"
-            className={classes.linkButtonActive}
-          >
-
+            className={classes.linkButtonActive}>
             {t('toobarExMap')}
           </Button>
-
         </ListItem>
-        <ListItem
-          disablePadding
-        >
+        <ListItem disablePadding>
           <Button
             onClick={() => handleSelection('camera')}
             variant="text"
             size="small"
-            className={classes.linkButton}
-          >
-
+            className={classes.linkButton}>
             {t('toobarExCamera')}
           </Button>
-
         </ListItem>
-        <ListItem
-          disablePadding
-
-        >
+        <ListItem disablePadding>
+          <Button
+            onClick={() => handleOpenReportPopover}
+            variant="text"
+            size="small"
+            className={classes.linkButton}>
+            {t('toobarExReport')}
+          </Button>
+          <Popover
+            id={reportPopoverId}
+            open={openReportPopover}
+            anchorEl={anchorElReport}
+            onClose={handleCloseReportPopover}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'left',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'left',
+            }}
+            disableRestoreFocus
+          >
+            <Menu>
+              <MenuItem onClick={() => handleNavigate('/reports/business')}>
+                {t('toobarExReportBusiness')}
+              </MenuItem>
+              <MenuItem onClick={() => handleNavigate('/reports/gtvt')}>
+                {t('toobarExReportGTVT')}
+              </MenuItem>
+            </Menu>
+          </Popover>
+        </ListItem>
+        <ListItem disablePadding>
           <Button
             onClick={() => handleSelection('history')}
             variant="text"
             size="small"
-            className={classes.linkButton}
-
-          >
-
+            className={classes.linkButton}>
             {t('toobarExHistory')}
           </Button>
         </ListItem>
-        <ListItem
-          disablePadding
-        >
+        <ListItem disablePadding>
           <Button
             onClick={() => handleSelection('comreport')}
             variant="text"
             size="small"
-            className={classes.linkButton}
-
-          >
-
+            className={classes.linkButton}>
             {t('toobarExComReport')}
           </Button>
         </ListItem>
-        <ListItem
-          disablePadding
-        >
+        <ListItem disablePadding>
           <Button
             onClick={() => handleSelection('manager')}
             variant="text"
             size="small"
-            className={classes.linkButton}
-
-          >
-
+            className={classes.linkButton}>
             {t('toobarExManager')}
           </Button>
         </ListItem>
-        <ListItem
-          disablePadding
-        >
+        <ListItem disablePadding>
           <Button
             onClick={handleClick}
             variant="text"
             size="small"
-            className={classes.linkButton}
-
-          >
-
+            className={classes.linkButton}>
             {t('toobarExSupport')}
           </Button>
         </ListItem>
@@ -276,7 +298,7 @@ const ToolbarEx = () => {
         </Tooltip>
         <Menu
           sx={{ mt: '45px' }}
-          id="menu-appbar"
+          id={userMenuId}
           anchorEl={anchorElUser}
           anchorOrigin={{
             vertical: 'top',
@@ -288,8 +310,7 @@ const ToolbarEx = () => {
             horizontal: 'right',
           }}
           open={Boolean(anchorElUser)}
-          onClose={handleCloseUserMenu}
-        >
+          onClose={handleCloseUserMenu}>
           <MenuItem onClick={handleAccount}>
             <Typography color="textPrimary">{t('settingsUser')}</Typography>
           </MenuItem>
@@ -302,8 +323,7 @@ const ToolbarEx = () => {
         id={id}
         open={open}
         anchorEl={anchorEl}
-        onClose={handleClose}
-      >
+        onClose={handleClose}>
         <TableContainer>
           <Table aria-label="simple table">
             <TableHead>

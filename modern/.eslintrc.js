@@ -28,5 +28,7 @@ module.exports = {
     'react/jsx-props-no-spreading': [0],
     'jsx-a11y/anchor-is-valid': [0],
     'no-console': 'off',
+    'linebreak-style': 0,
+    'react/jsx-closing-bracket-location': [1, 'line-aligned']
   },
 };
