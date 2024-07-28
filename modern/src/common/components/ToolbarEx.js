@@ -139,8 +139,11 @@ const ToolbarEx = () => {
       case 'camera':
         navigate('/livecamera');
         break;
-      case 'report':
-        navigate('/report');
+      case 'reportsGTVT':
+        navigate('/reports/gtvt');
+        break;
+      case 'reportsBusiness':
+        navigate('/reports/business');
         break;
       case 'history':
         navigate('/replay');
@@ -187,10 +190,11 @@ const ToolbarEx = () => {
       bgcolor: theme.palette.colors.toolbar,
       borderRadius: '8px',
       width: '100%',
+      height: 64,
       justifyContent: 'space-between',
     }}>
       <List style={{ display: 'flex', width: '100%', marginLeft: '10px', background: theme.palette.colors.toolbar, justifyContent: 'space-between' }}>
-        <ListItem disablePadding className={classes.listItem}>
+        <ListItem disablePadding style={{ width: 'auto' }} className={classes.listItem}>
           <Button
             onClick={() => handleSelection('map')}
             variant="text"
@@ -199,7 +203,7 @@ const ToolbarEx = () => {
             {t('toobarExMap')}
           </Button>
         </ListItem>
-        <ListItem disablePadding className={classes.listItem}>
+        <ListItem disablePadding style={{ width: 'auto' }} className={classes.listItem}>
           <Button
             onClick={() => handleSelection('camera')}
             variant="text"
@@ -208,25 +212,25 @@ const ToolbarEx = () => {
             {t('toobarExCamera')}
           </Button>
         </ListItem>
-        <ListItem disablePadding className={classes.listItem}>
+        <ListItem disablePadding style={{ width: 'auto' }} className={classes.listItem}>
           <Button
-            onClick={() => handleSelection('reportGTVT')}
+            onClick={() => handleSelection('reportsGTVT')}
             variant="text"
             size="small"
             className={classes.linkButton}>
             {t('toobarExReportGTVT')}
           </Button>
         </ListItem>
-        <ListItem disablePadding className={classes.listItem}>
+        <ListItem disablePadding style={{ width: 'auto' }} className={classes.listItem}>
           <Button
-            onClick={() => handleSelection('reportBusiness')}
+            onClick={() => handleSelection('reportsBusiness')}
             variant="text"
             size="small"
             className={classes.linkButton}>
             {t('toobarExReportBusiness')}
           </Button>
         </ListItem>
-        <ListItem disablePadding className={classes.listItem}>
+        <ListItem disablePadding style={{ width: 'auto' }} className={classes.listItem}>
           <Button
             onClick={() => handleSelection('history')}
             variant="text"
@@ -235,7 +239,7 @@ const ToolbarEx = () => {
             {t('toobarExHistory')}
           </Button>
         </ListItem>
-        <ListItem disablePadding className={classes.listItem}>
+        <ListItem disablePadding style={{ width: 'auto' }} className={classes.listItem}>
           <Button
             onClick={() => handleSelection('comreport')}
             variant="text"
@@ -244,7 +248,7 @@ const ToolbarEx = () => {
             {t('toobarExComReport')}
           </Button>
         </ListItem>
-        <ListItem disablePadding className={classes.listItem}>
+        <ListItem disablePadding style={{ width: 'auto' }} className={classes.listItem}>
           <Button
             onClick={() => handleSelection('manager')}
             variant="text"
@@ -253,7 +257,7 @@ const ToolbarEx = () => {
             {t('toobarExManager')}
           </Button>
         </ListItem>
-        <ListItem disablePadding className={classes.listItem}>
+        <ListItem disablePadding style={{ width: 'auto' }} className={classes.listItem}>
           <Button
             onClick={handleClick}
             variant="text"

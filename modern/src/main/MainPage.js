@@ -76,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     [theme.breakpoints.up('md')]: {
       position: 'fixed',
-      left: 460,
+      left: 360,
       top: 0,
       flex: 1,
       width: '60%',

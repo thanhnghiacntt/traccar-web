@@ -30,6 +30,8 @@ import NetworkPage from './other/NetworkPage';
 import EventReportPage from './reports/EventReportPage';
 import CameraImageReportPage from './reports/CameraImageReportPage';
 import CameraVideoReportPage from './reports/CameraVideoReportPage';
+import GTVTReport from './reports/GTVTReport';
+import BusinessReport from './reports/BusinessReport';
 
 import TollstationReportPage from './reports/TollstationReportPage';
 import OverspeedReportPage from './reports/OverspeedReportPage';
@@ -200,7 +202,8 @@ const Navigation = () => {
           <Route path="statistics" element={<StatisticsPage />} />
           <Route path="cameraimage" element={<CameraImageReportPage />} />
           <Route path="cameravideo" element={<CameraVideoReportPage />} />
-
+          <Route path="gtvt" element={<GTVTReport />} />
+          <Route path="business" element={<BusinessReport />} />
         </Route>
       </Route>
     </Routes>
