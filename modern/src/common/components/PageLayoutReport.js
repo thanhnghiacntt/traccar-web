@@ -79,8 +79,7 @@ const PageLayoutReport = ({ menu, breadcrumbs, children }) => {
       <Drawer
         variant="permanent"
         className={classes.desktopDrawer}
-        classes={{ paper: classes.desktopDrawer }}
-      >
+        classes={{ paper: classes.desktopDrawer }}>
         <Toolbar>
           <IconButton color="inherit" edge="start" sx={{ mr: 2 }} onClick={() => navigate('/')}>
             <ArrowBackIcon />

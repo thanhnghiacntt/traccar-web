@@ -9,6 +9,7 @@ import SocketController from './SocketController';
 import CachingController from './CachingController';
 import { useEffectAsync } from './reactHelper';
 import { sessionActions } from './store';
+import ToolbarEx from './common/components/ToolbarEx';
 
 const useStyles = makeStyles(() => ({
   page: {
@@ -45,7 +46,8 @@ const App = () => {
   }, [initialized]);
 
   return !initialized ? (<LinearProgress />) : (
-    <>
+    <div>
+      <ToolbarEx />
       <SocketController />
       <CachingController />
       <div className={classes.page}>
@@ -56,7 +58,7 @@ const App = () => {
           <BottomMenu />
         </div>
       )}
-    </>
+    </div>
   );
 };
 

@@ -661,10 +661,10 @@
     "toobarExMap":"Giám sát",
     "toobarExCamera":"Camera",
     "toobarExReport":"Báo cáo",
-    "toobarExReportBusiness":"Báo cáo danh nghiệp",
+    "toobarExReportBusiness":"Báo cáo doanh nghiệp",
     "toobarExReportGTVT":"Báo cáo bộ GTVT",
     "toobarExHistory":"Lịch sử",
-    "toobarExManager":"Quản lý",
+    "toobarExManager":"Quản trị",
     "toobarExComReport":"Báo cáo",
     "toobarExGovReport":"BC QCVN31",
     "toobarExSupport":"Hỗ trợ",
@@ -688,8 +688,14 @@
     "modelCode":"Mã thiết bị",
     "modelPort":"Cổng TCP",
     "modeSMS":"Lệnh SMS",
-    "simType":"Loại SIM"
-
-
-
+    "simType":"Loại SIM",
+    "reportTT73GTVT":"Báo cáo TT73/2014/TT - BGTVT",
+    "vehicleRoute":"Hành trình xe chạy",
+    "vehicleSpeed":"Tốc độ của xe",
+    "exceedingSpeed​​Limit":"Quá tốc độ giới hạn",
+    "continuousDrivingTime":"Thời gian lái xe liên tục",
+    "stoppingReport":"Báo cáo dừng đỗ",
+    "vehicleSummaryReport":"Báo cáo tổng hợp theo xe",
+    "driverSummaryReport":"Báo cáo tổng hợp theo lái xe",
+    "drivingTimeReportfortheDay":"Báo cáo thời gian lái xe trong ngày"
 }

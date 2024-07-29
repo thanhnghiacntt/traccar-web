@@ -13,7 +13,7 @@ import { formatTime } from '../common/util/formatter';
 import ReportFilter from './components/ReportFilter';
 import { useTranslation } from '../common/components/LocalizationProvider';
 import PageLayoutReport from '../common/components/PageLayoutReport';
-import ReportsMenu from './components/ReportsMenu';
+import LayoutReportMenu from './components/LayoutReportMenu';
 // import ImageViewerWithText from './components/ImageViewerWithText';
 
 import { useCatch } from '../reactHelper';
@@ -165,7 +165,7 @@ const BusinessReport = () => {
     // console.log(playbackURL);
   }
   return (
-    <PageLayoutReport menu={<ReportsMenu />} breadcrumbs={['reportTitle', 'reportEvents']}>
+    <PageLayoutReport menu={<LayoutReportMenu />} breadcrumbs={['reportTitle', 'reportEvents']}>
       <div className={classes.container}>
         <div className={classes.containerMain}>
           <div className={classes.header}>

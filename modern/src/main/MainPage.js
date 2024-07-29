@@ -17,9 +17,9 @@ import EventsDrawer from './EventsDrawer';
 import useFilter from './useFilter';
 import MainToolbar from './MainToolbar';
 import MainMap from './MainMap';
-import ToolbarEx from '../common/components/ToolbarEx';
 
 import { useAttributePreference } from '../common/util/preferences';
+import ToolbarEx from '../common/components/ToolbarEx';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
       left: 0,
       height: `calc(100% - ${theme.spacing(3)})`,
       width: theme.dimensions.drawerWidthDesktop,
-      margin: theme.spacing(1),
+      margin: theme.spacing(0),
       zIndex: 3,
     },
     [theme.breakpoints.down('md')]: {
@@ -47,11 +47,6 @@ const useStyles = makeStyles((theme) => ({
     pointerEvents: 'auto',
     zIndex: 6,
     width: '100%',
-  },
-  toolbarEx: {
-    background: theme.palette.colors.medium,
-    pointerEvents: 'auto',
-    zIndex: 8,
   },
   footer: {
     pointerEvents: 'auto',
@@ -69,24 +64,6 @@ const useStyles = makeStyles((theme) => ({
     pointerEvents: 'auto',
     gridArea: '1 / 1',
     zIndex: 4,
-  },
-  tabMenu: {
-    pointerEvents: 'none',
-    display: 'flex',
-    flexDirection: 'column',
-    [theme.breakpoints.up('md')]: {
-      position: 'fixed',
-      left: 360,
-      top: 0,
-      flex: 1,
-      width: '60%',
-      margin: theme.spacing(1),
-      zIndex: 7,
-    },
-    [theme.breakpoints.down('md')]: {
-      height: '100%',
-      width: '100%',
-    },
   },
 }));
 
@@ -187,12 +164,7 @@ const MainPage = () => {
         )}
       </div>
       <EventsDrawer open={eventsOpen} onClose={() => setEventsOpen(false)} />
-      <div className={classes.tabMenu}>
-        <div className={classes.toolbarEx}>
-          <ToolbarEx />
-        </div>
-      </div>
-
+      <ToolbarEx />
       {selectedDeviceId && !showCameraId && (
         <StatusCard
           deviceId={selectedDeviceId}

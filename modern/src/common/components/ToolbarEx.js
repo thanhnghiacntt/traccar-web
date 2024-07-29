@@ -27,7 +27,7 @@ import ListItem from '@mui/material/ListItem';
 import { makeStyles, useTheme } from '@mui/styles';
 import { green, grey } from '@mui/material/colors';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from './LocalizationProvider';
 import { nativePostMessage } from './NativeInterface';
 import { sessionActions } from '../../store';
@@ -54,22 +54,27 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     textTransform: 'none',
     color: grey[50],
+    cursor: 'pointer',
     whiteSpace: 'nowrap',
     '&:hover': {
       backgroundColor: green[200],
       textDecoration: 'underline',
       color: grey[50],
+      cursor: 'pointer',
     },
   },
   linkButtonActive: {
     fontSize: '14px',
     fontFamily: 'Arial',
     fontWeight: 'bold',
+    cursor: 'pointer',
     textTransform: 'none',
     color: grey[50],
     whiteSpace: 'nowrap',
+    backgroundColor: green[200],
     '&:hover': {
       backgroundColor: green[200],
+      cursor: 'pointer',
       textDecoration: 'underline',
 
     },
@@ -80,10 +85,34 @@ const useStyles = makeStyles((theme) => ({
       width: 'auto',
     },
   },
+  tabMenu: {
+    pointerEvents: 'none',
+    display: 'flex',
+    flexDirection: 'column',
+    [theme.breakpoints.up('md')]: {
+      position: 'fixed',
+      left: 360,
+      top: 0,
+      flex: 1,
+      width: '60%',
+      margin: theme.spacing(0),
+      zIndex: 7,
+    },
+    [theme.breakpoints.down('md')]: {
+      height: '100%',
+      width: '100%',
+    },
+  },
+  toolbarEx: {
+    background: theme.palette.colors.medium,
+    pointerEvents: 'auto',
+    zIndex: 8,
+  },
 }));
 
 const ToolbarEx = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const t = useTranslation();
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
@@ -182,156 +211,160 @@ const ToolbarEx = () => {
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
   return (
-    <Box sx={{
-      flexGrow: 1,
-      display: { xs: 'none', md: 'flex' },
-      alignItems: 'center',
-      textAlign: 'center',
-      bgcolor: theme.palette.colors.toolbar,
-      borderRadius: '8px',
-      width: '100%',
-      height: 64,
-      justifyContent: 'space-between',
-    }}>
-      <List style={{ display: 'flex', width: '100%', marginLeft: '10px', background: theme.palette.colors.toolbar, justifyContent: 'space-between' }}>
-        <ListItem disablePadding style={{ width: 'auto' }} className={classes.listItem}>
-          <Button
-            onClick={() => handleSelection('map')}
-            variant="text"
-            size="small"
-            className={classes.linkButtonActive}>
-            {t('toobarExMap')}
-          </Button>
-        </ListItem>
-        <ListItem disablePadding style={{ width: 'auto' }} className={classes.listItem}>
-          <Button
-            onClick={() => handleSelection('camera')}
-            variant="text"
-            size="small"
-            className={classes.linkButton}>
-            {t('toobarExCamera')}
-          </Button>
-        </ListItem>
-        <ListItem disablePadding style={{ width: 'auto' }} className={classes.listItem}>
-          <Button
-            onClick={() => handleSelection('reportsGTVT')}
-            variant="text"
-            size="small"
-            className={classes.linkButton}>
-            {t('toobarExReportGTVT')}
-          </Button>
-        </ListItem>
-        <ListItem disablePadding style={{ width: 'auto' }} className={classes.listItem}>
-          <Button
-            onClick={() => handleSelection('reportsBusiness')}
-            variant="text"
-            size="small"
-            className={classes.linkButton}>
-            {t('toobarExReportBusiness')}
-          </Button>
-        </ListItem>
-        <ListItem disablePadding style={{ width: 'auto' }} className={classes.listItem}>
-          <Button
-            onClick={() => handleSelection('history')}
-            variant="text"
-            size="small"
-            className={classes.linkButton}>
-            {t('toobarExHistory')}
-          </Button>
-        </ListItem>
-        <ListItem disablePadding style={{ width: 'auto' }} className={classes.listItem}>
-          <Button
-            onClick={() => handleSelection('comreport')}
-            variant="text"
-            size="small"
-            className={classes.linkButton}>
-            {t('toobarExComReport')}
-          </Button>
-        </ListItem>
-        <ListItem disablePadding style={{ width: 'auto' }} className={classes.listItem}>
-          <Button
-            onClick={() => handleSelection('manager')}
-            variant="text"
-            size="small"
-            className={classes.linkButton}>
-            {t('toobarExManager')}
-          </Button>
-        </ListItem>
-        <ListItem disablePadding style={{ width: 'auto' }} className={classes.listItem}>
-          <Button
-            onClick={handleClick}
-            variant="text"
-            size="small"
-            className={classes.linkButton}>
-            {t('toobarExSupport')}
-          </Button>
-        </ListItem>
-      </List>
+    <div className={classes.tabMenu}>
+      <div className={classes.toolbarEx}>
+        <Box sx={{
+          flexGrow: 1,
+          display: { xs: 'none', md: 'flex' },
+          alignItems: 'center',
+          textAlign: 'center',
+          bgcolor: theme.palette.colors.toolbar,
+          borderRadius: '8px',
+          width: '100%',
+          height: 64,
+          justifyContent: 'space-between',
+        }}>
+          <List style={{ display: 'flex', width: '100%', marginLeft: '10px', background: theme.palette.colors.toolbar, justifyContent: 'space-between' }}>
+            <ListItem disablePadding style={{ width: 'auto' }} className={classes.listItem}>
+              <Button
+                onClick={() => handleSelection('map')}
+                variant="text"
+                size="small"
+                className={classes.linkButton}>
+                {t('toobarExMap')}
+              </Button>
+            </ListItem>
+            <ListItem disablePadding style={{ width: 'auto' }} className={classes.listItem}>
+              <Button
+                onClick={() => handleSelection('camera')}
+                variant="text"
+                size="small"
+                className={location.pathname === '/livecamera' ? classes.linkButtonActive : classes.linkButton}>
+                {t('toobarExCamera')}
+              </Button>
+            </ListItem>
+            <ListItem disablePadding style={{ width: 'auto' }} className={classes.listItem}>
+              <Button
+                onClick={() => handleSelection('reportsGTVT')}
+                variant="text"
+                size="small"
+                className={location.pathname === '/reports/gtvt' ? classes.linkButtonActive : classes.linkButton}>
+                {t('toobarExReportGTVT')}
+              </Button>
+            </ListItem>
+            <ListItem disablePadding style={{ width: 'auto' }} className={classes.listItem}>
+              <Button
+                onClick={() => handleSelection('reportsBusiness')}
+                variant="text"
+                size="small"
+                className={location.pathname === '/reports/business' ? classes.linkButtonActive : classes.linkButton}>
+                {t('toobarExReportBusiness')}
+              </Button>
+            </ListItem>
+            <ListItem disablePadding style={{ width: 'auto' }} className={classes.listItem}>
+              <Button
+                onClick={() => handleSelection('history')}
+                variant="text"
+                size="small"
+                className={location.pathname === '/replay' ? classes.linkButtonActive : classes.linkButton}>
+                {t('toobarExHistory')}
+              </Button>
+            </ListItem>
+            <ListItem disablePadding style={{ width: 'auto' }} className={classes.listItem}>
+              <Button
+                onClick={() => handleSelection('comreport')}
+                variant="text"
+                size="small"
+                className={location.pathname === '/reports/route' ? classes.linkButtonActive : classes.linkButton}>
+                {t('toobarExComReport')}
+              </Button>
+            </ListItem>
+            <ListItem disablePadding style={{ width: 'auto' }} className={classes.listItem}>
+              <Button
+                onClick={() => handleSelection('manager')}
+                variant="text"
+                size="small"
+                className={location.pathname === '/settings/preferences' ? classes.linkButtonActive : classes.linkButton}>
+                {t('toobarExManager')}
+              </Button>
+            </ListItem>
+            <ListItem disablePadding style={{ width: 'auto' }} className={classes.listItem}>
+              <Button
+                onClick={handleClick}
+                variant="text"
+                size="small"
+                className={classes.linkButton}>
+                {t('toobarExSupport')}
+              </Button>
+            </ListItem>
+          </List>
 
-      <Box sx={{ marginRight: '14px' }}>
-        <Tooltip title="Thông tin tài khoản">
-          <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-            <PersonIcon />
-          </IconButton>
-        </Tooltip>
-        <Menu
-          sx={{ mt: '45px' }}
-          id="menu-appbar"
-          anchorEl={anchorElUser}
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          keepMounted
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          open={Boolean(anchorElUser)}
-          onClose={handleCloseUserMenu}>
-          <MenuItem onClick={handleAccount}>
-            <Typography color="textPrimary">{t('settingsUser')}</Typography>
-          </MenuItem>
-          <MenuItem onClick={handleLogout}>
-            <Typography color="error">{t('loginLogout')}</Typography>
-          </MenuItem>
-        </Menu>
-      </Box>
-      <Popover
-        id={id}
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handleClose}>
-        <TableContainer>
-          <Table aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell>Vùng miền</TableCell>
-                <TableCell align="right">Hotline</TableCell>
-                <TableCell align="right">Gia hạn dịch vụ</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              <TableRow>
-                <TableCell align="right">Miền Bắc</TableCell>
-                <TableCell align="right">0978702238</TableCell>
-                <TableCell align="right">0978702238</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell align="right">Miền Trung</TableCell>
-                <TableCell align="right">0978702238</TableCell>
-                <TableCell align="right">0978702238</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell align="right">Miền Nam</TableCell>
-                <TableCell align="right">0978702238</TableCell>
-                <TableCell align="right">0978702238</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Popover>
-    </Box>
+          <Box sx={{ marginRight: '14px' }}>
+            <Tooltip title="Thông tin tài khoản">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <PersonIcon />
+              </IconButton>
+            </Tooltip>
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}>
+              <MenuItem onClick={handleAccount}>
+                <Typography color="textPrimary">{t('settingsUser')}</Typography>
+              </MenuItem>
+              <MenuItem onClick={handleLogout}>
+                <Typography color="error">{t('loginLogout')}</Typography>
+              </MenuItem>
+            </Menu>
+          </Box>
+          <Popover
+            id={id}
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handleClose}>
+            <TableContainer>
+              <Table aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Vùng miền</TableCell>
+                    <TableCell align="right">Hotline</TableCell>
+                    <TableCell align="right">Gia hạn dịch vụ</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <TableRow>
+                    <TableCell align="right">Miền Bắc</TableCell>
+                    <TableCell align="right">0978702238</TableCell>
+                    <TableCell align="right">0978702238</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell align="right">Miền Trung</TableCell>
+                    <TableCell align="right">0978702238</TableCell>
+                    <TableCell align="right">0978702238</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell align="right">Miền Nam</TableCell>
+                    <TableCell align="right">0978702238</TableCell>
+                    <TableCell align="right">0978702238</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Popover>
+        </Box>
+      </div>
+    </div>
   );
 };
 export default ToolbarEx;
