@@ -162,10 +162,9 @@ const GTVTReport = () => {
     swfobject.startVodM(playbackURL, '');
     const section = document.querySelector('#cmsv6flash');
     section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    // console.log(playbackURL);
   }
   return (
-    <PageLayoutReport menu={<LayoutReportMenu />} breadcrumbs={['reportTitle', 'reportEvents']}>
+    <PageLayoutReport menu={<LayoutReportMenu isGTVT={true} />} breadcrumbs={['reportTitle', 'reportEvents']}>
       <div className={classes.container}>
         <div className={classes.containerMain}>
           <div className={classes.header}>
@@ -183,9 +182,7 @@ const GTVTReport = () => {
                         values = [clicked];
                       }
                       setChanel(clicked);
-                      // console.log(clicked);
-                    }}
-                  >
+                    }}>
                     <MenuItem key="ch1" value="0">{t('videoch1')}</MenuItem>
                     <MenuItem key="ch2" value="1">{t('videoch2')}</MenuItem>
                     <MenuItem key="ch3" value="2">{t('videoch3')}</MenuItem>
