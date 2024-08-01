@@ -30,6 +30,11 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: theme.spacing(1),
   },
+  item: {
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  },
 }));
 
 const OneReport = ({ handle, open, title, classes, children }) => (
@@ -61,6 +66,8 @@ const LayoutReportMenu = ({ isGTVT }) => {
   const [isSynthesisReport, setIsSynthesisReport] = useState(true);
   const [isActivityReport, setIsActivityReport] = useState(true);
   const [isScheduleReport, setIsScheduleReport] = useState(true);
+  const [isEngineReport, setIsEngineReport] = useState(true);
+  const [isSystemReport, setIsSystemReport] = useState(true);
 
   const handleClick = () => {
     setOpen(!open);
@@ -78,6 +85,14 @@ const LayoutReportMenu = ({ isGTVT }) => {
     setIsScheduleReport(!isScheduleReport);
   };
 
+  const handleSystemReport = () => {
+    setIsSystemReport(!isSystemReport);
+  };
+
+  const handleEngineReport = () => {
+    setIsEngineReport(!isEngineReport);
+  };
+
   if (!isGTVT) {
     return (
       <div className={classes.menu}>
@@ -88,10 +103,6 @@ const LayoutReportMenu = ({ isGTVT }) => {
           classes={classes}>
           <List component="div" disablePadding>
             <Item
-              title={t('summaryReportActivitiesTeam')}
-              icon="/images/s_icon_baoCaoTongHop.png"
-            />
-            <Item
               title={t('summaryReportActivities')}
               icon="/images/s_icon_baoCaoTongHop.png"
             />
@@ -100,15 +111,11 @@ const LayoutReportMenu = ({ isGTVT }) => {
               icon="/images/s_icon_baoCaoChiTiet.png"
             />
             <Item
-              title={t('summaryReportActivitiesSignalLoss')}
-              icon="/images/s_icon_baoCaoChiTiet.png"
+              title={t('accumulatedKmSummaryReport')}
+              icon="/images/s_icon_baoCaoTongHop.png"
             />
             <Item
-              title={t('appointmentReport')}
-              icon="/images/s_icon_listCompanies.png"
-            />
-            <Item
-              title={t('vehicleOperatingKmSummaryReport')}
+              title={t('businessSpeedingReport')}
               icon="/images/report_summary.png"
             />
           </List>
@@ -120,20 +127,12 @@ const LayoutReportMenu = ({ isGTVT }) => {
           classes={classes}>
           <List component="div" disablePadding>
             <Item
-              title={t('summaryReportAirConditioning')}
-              icon="/images/s_icon_baoCaoBatDieuHoa.png"
-            />
-            <Item
               title={t('parkingReport')}
               icon="/images/s_icon_baoCaoDungDo.png"
             />
             <Item
               title={t('stationEntryExitReport')}
               icon="/images/s_icon_baoCaoRaVaoTram.png"
-            />
-            <Item
-              title={t('businessTripReport')}
-              icon="/images/s_icon_baoCaoChuyenKD.png"
             />
             <Item
               title={t('airConditionerReport')}
@@ -146,14 +145,6 @@ const LayoutReportMenu = ({ isGTVT }) => {
             <Item
               title={t('roadTollCollectionTollReportStage')}
               icon="/images/config-icon.png"
-            />
-            <Item
-              title={t('tollPointFareReport')}
-              icon="/images/s_icon_baoCaoXeQuaDiemThuPhi.png"
-            />
-            <Item
-              title={t('monthlyActivitySummaryReport')}
-              icon="/images/reports-icon.png"
             />
           </List>
         </OneReport>
@@ -178,6 +169,38 @@ const LayoutReportMenu = ({ isGTVT }) => {
             <Item
               title={t('monthlyRouteScheduleSummaryReport')}
               icon="/images/s_icon_baoCaoTHLichTrinhTuyen.png"
+            />
+          </List>
+        </OneReport>
+        <OneReport
+          handle={handleEngineReport}
+          open={isEngineReport}
+          title={t('engineReport')}
+          classes={classes}>
+          <List component="div" disablePadding>
+            <Item
+              title={t('engineReport')}
+              icon="/images/default_car.png"
+            />
+            <Item
+              title={t('engineStatusReport')}
+              icon="/images/default_car.png"
+            />
+          </List>
+        </OneReport>
+        <OneReport
+          handle={handleSystemReport}
+          open={isSystemReport}
+          title={t('systemReport')}
+          classes={classes}>
+          <List component="div" disablePadding>
+            <Item
+              title={t('pulseErrorReport')}
+              icon="/images/bc_LoiXung.png"
+            />
+            <Item
+              title={t('reportLostSignal')}
+              icon="/images/s_icon_baoCaoMatGPS.png"
             />
           </List>
         </OneReport>

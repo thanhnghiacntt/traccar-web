@@ -727,5 +727,8 @@
     "journeyReport":"Báo cáo hành trình",
     "routeScheduleReport":"Báo cáo lịch trình tuyến",
     "routeScheduleSummaryReport":"Báo cáo tổng hợp lịch trình tuyến",
-    "monthlyRouteScheduleSummaryReport":"Báo cáo tổng hợp lịch trình tuyến tháng"
+    "monthlyRouteScheduleSummaryReport":"Báo cáo tổng hợp lịch trình tuyến tháng",
+    "engineStatusReport":"Báo cáo trạng thái động cơ",
+    "pulseErrorReport":"Báo cáo lỗi xung",
+    "reportLostSignal":"Báo cáo mất tín hiệu"
 }
