@@ -30,9 +30,12 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: theme.spacing(1),
   },
-  item: {
+  itemIcon: {
+    cursor: 'default',
+    textDecoration: 'none',
     '&:hover': {
       cursor: 'pointer',
+      textDecoration: 'underline',
     },
   },
 }));
@@ -49,12 +52,12 @@ const OneReport = ({ handle, open, title, classes, children }) => (
   </List>
 );
 
-const Item = ({ title, icon, alt }) => (
-  <ListItem>
+const Item = ({ title, icon, classes }) => (
+  <ListItem style={{ cursor: 'point' }}>
     <ListItemIcon>
-      <img src={icon} alt={alt ?? title} style={{ width: 24 }} />
+      <img src={icon} alt={title} className={classes.itemIcon} style={{ width: 24 }} />
     </ListItemIcon>
-    <ListItemText primary={title} />
+    <ListItemText primary={title} className={classes.itemIcon} />
   </ListItem>
 );
 
@@ -105,18 +108,22 @@ const LayoutReportMenu = ({ isGTVT }) => {
             <Item
               title={t('summaryReportActivities')}
               icon="/images/s_icon_baoCaoTongHop.png"
+              classes={classes}
             />
             <Item
               title={t('detailedActivityReport')}
               icon="/images/s_icon_baoCaoChiTiet.png"
+              classes={classes}
             />
             <Item
               title={t('accumulatedKmSummaryReport')}
               icon="/images/s_icon_baoCaoTongHop.png"
+              classes={classes}
             />
             <Item
               title={t('businessSpeedingReport')}
               icon="/images/report_summary.png"
+              classes={classes}
             />
           </List>
         </OneReport>
@@ -129,22 +136,27 @@ const LayoutReportMenu = ({ isGTVT }) => {
             <Item
               title={t('parkingReport')}
               icon="/images/s_icon_baoCaoDungDo.png"
+              classes={classes}
             />
             <Item
               title={t('stationEntryExitReport')}
               icon="/images/s_icon_baoCaoRaVaoTram.png"
+              classes={classes}
             />
             <Item
               title={t('airConditionerReport')}
               icon="/images/s_icon_baoCaoBatDieuHoa.png"
+              classes={classes}
             />
             <Item
               title={t('reportVehiclePassingTollPoint')}
               icon="/images/s_icon_baoCaoXeQuaDiemThuPhi.png"
+              classes={classes}
             />
             <Item
               title={t('roadTollCollectionTollReportStage')}
               icon="/images/config-icon.png"
+              classes={classes}
             />
           </List>
         </OneReport>
@@ -157,18 +169,22 @@ const LayoutReportMenu = ({ isGTVT }) => {
             <Item
               title={t('journeyReport')}
               icon="/images/s_baoCaoHanhTrinh.png"
+              classes={classes}
             />
             <Item
               title={t('routeScheduleReport')}
               icon="/images/s_icon_baoCaoLichTrinhTuyen.png"
+              classes={classes}
             />
             <Item
               title={t('routeScheduleSummaryReport')}
               icon="/images/s_icon_baoCaoTHLichTrinhTuyen.png"
+              classes={classes}
             />
             <Item
               title={t('monthlyRouteScheduleSummaryReport')}
               icon="/images/s_icon_baoCaoTHLichTrinhTuyen.png"
+              classes={classes}
             />
           </List>
         </OneReport>
@@ -181,10 +197,12 @@ const LayoutReportMenu = ({ isGTVT }) => {
             <Item
               title={t('engineReport')}
               icon="/images/default_car.png"
+              classes={classes}
             />
             <Item
               title={t('engineStatusReport')}
               icon="/images/default_car.png"
+              classes={classes}
             />
           </List>
         </OneReport>
@@ -197,10 +215,12 @@ const LayoutReportMenu = ({ isGTVT }) => {
             <Item
               title={t('pulseErrorReport')}
               icon="/images/bc_LoiXung.png"
+              classes={classes}
             />
             <Item
               title={t('reportLostSignal')}
               icon="/images/s_icon_baoCaoMatGPS.png"
+              classes={classes}
             />
           </List>
         </OneReport>
@@ -219,34 +239,42 @@ const LayoutReportMenu = ({ isGTVT }) => {
           <Item
             title={t('vehicleRoute')}
             icon="/images/s_baoCaoHanhTriNh.png"
+            classes={classes}
           />
           <Item
             title={t('vehicleSpeed')}
             icon="/images/s_icon_baoCaoQuaTocDo.png"
+            classes={classes}
           />
           <Item
             title={t('exceedingSpeed​​Limit')}
             icon="/images/s_icon_baoCaoQuaTocDo.png"
+            classes={classes}
           />
           <Item
             title={t('continuousDrivingTime')}
             icon="/images/s_icon_baoCaoTGLXLT_Ngay.png"
+            classes={classes}
           />
           <Item
             title={t('stoppingReport')}
             icon="/images/s_icon_baoCaoDungDo.png"
+            classes={classes}
           />
           <Item
             title={t('vehicleSummaryReport')}
             icon="/images/s_icon_baoCaoTongHop.png"
+            classes={classes}
           />
           <Item
             title={t('driverSummaryReport')}
             icon="/images/s_icon_baoCaoTongHop.png"
+            classes={classes}
           />
           <Item
             title={t('drivingTimeReportfortheDay')}
             icon="/images/s_icon_baoCaoTGLXLT_Ngay.png"
+            classes={classes}
           />
         </List>
       </OneReport>

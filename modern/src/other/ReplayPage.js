@@ -80,6 +80,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
   content: {
+    top: 60,
     display: 'flex',
     flexDirection: 'column',
     padding: theme.spacing(2),

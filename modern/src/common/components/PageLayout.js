@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 1,
   },
   content: {
+    top: 60,
     flexGrow: 1,
     alignItems: 'stretch',
     display: 'flex',

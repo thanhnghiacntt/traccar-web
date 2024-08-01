@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   content: {
+    top: 60,
     overflow: 'auto',
     paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(2),

@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   content: {
+    top: 70,
     flexGrow: 1,
     overflow: 'hidden',
     display: 'flex',
@@ -170,6 +171,7 @@ const LiveCamera = () => {
         <Drawer
           anchor={isPhone ? 'bottom' : 'left'}
           variant="permanent"
+          style={{ 'margin-right': '40px' }}
           classes={{ paper: classes.drawerPaper }}
         >
           <Toolbar>
