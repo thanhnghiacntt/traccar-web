@@ -47,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
   mapContainer: {
     flexGrow: 1,
+    position: 'fixed',
   },
   title: {
     flexGrow: 1,
