@@ -52,8 +52,8 @@ const OneReport = ({ handle, open, title, classes, children }) => (
   </List>
 );
 
-const Item = ({ title, icon, classes }) => (
-  <ListItem style={{ cursor: 'point' }}>
+const Item = ({ title, icon, classes, actionClick }) => (
+  <ListItem style={{ cursor: 'point' }} onClick={actionClick}>
     <ListItemIcon>
       <img src={icon} alt={title} className={classes.itemIcon} style={{ width: 24 }} />
     </ListItemIcon>
@@ -61,7 +61,7 @@ const Item = ({ title, icon, classes }) => (
   </ListItem>
 );
 
-const LayoutReportMenu = ({ isGTVT }) => {
+const LayoutReportMenu = ({ isGTVT, clickAction }) => {
   const theme = useTheme();
   const classes = useStyles(theme);
   const t = useTranslation();
@@ -72,7 +72,7 @@ const LayoutReportMenu = ({ isGTVT }) => {
   const [isEngineReport, setIsEngineReport] = useState(true);
   const [isSystemReport, setIsSystemReport] = useState(true);
 
-  const handleClick = () => {
+  const handleReportTT73GTVT = () => {
     setOpen(!open);
   };
 
@@ -109,21 +109,25 @@ const LayoutReportMenu = ({ isGTVT }) => {
               title={t('summaryReportActivities')}
               icon="/images/s_icon_baoCaoTongHop.png"
               classes={classes}
+              actionClick={() => clickAction('summaryReportActivities')}
             />
             <Item
               title={t('detailedActivityReport')}
               icon="/images/s_icon_baoCaoChiTiet.png"
               classes={classes}
+              actionClick={() => clickAction('detailedActivityReport')}
             />
             <Item
               title={t('accumulatedKmSummaryReport')}
               icon="/images/s_icon_baoCaoTongHop.png"
               classes={classes}
+              actionClick={() => clickAction('accumulatedKmSummaryReport')}
             />
             <Item
               title={t('businessSpeedingReport')}
               icon="/images/report_summary.png"
               classes={classes}
+              actionClick={() => clickAction('businessSpeedingReport')}
             />
           </List>
         </OneReport>
@@ -137,26 +141,31 @@ const LayoutReportMenu = ({ isGTVT }) => {
               title={t('parkingReport')}
               icon="/images/s_icon_baoCaoDungDo.png"
               classes={classes}
+              actionClick={() => clickAction('parkingReport')}
             />
             <Item
               title={t('stationEntryExitReport')}
               icon="/images/s_icon_baoCaoRaVaoTram.png"
               classes={classes}
+              actionClick={() => clickAction('stationEntryExitReport')}
             />
             <Item
               title={t('airConditionerReport')}
               icon="/images/s_icon_baoCaoBatDieuHoa.png"
               classes={classes}
+              actionClick={() => clickAction('airConditionerReport')}
             />
             <Item
               title={t('reportVehiclePassingTollPoint')}
               icon="/images/s_icon_baoCaoXeQuaDiemThuPhi.png"
               classes={classes}
+              actionClick={() => clickAction('reportVehiclePassingTollPoint')}
             />
             <Item
               title={t('roadTollCollectionTollReportStage')}
               icon="/images/config-icon.png"
               classes={classes}
+              actionClick={() => clickAction('roadTollCollectionTollReportStage')}
             />
           </List>
         </OneReport>
@@ -170,21 +179,25 @@ const LayoutReportMenu = ({ isGTVT }) => {
               title={t('journeyReport')}
               icon="/images/s_baoCaoHanhTrinh.png"
               classes={classes}
+              actionClick={() => clickAction('journeyReport')}
             />
             <Item
               title={t('routeScheduleReport')}
               icon="/images/s_icon_baoCaoLichTrinhTuyen.png"
               classes={classes}
+              actionClick={() => clickAction('routeScheduleReport')}
             />
             <Item
               title={t('routeScheduleSummaryReport')}
               icon="/images/s_icon_baoCaoTHLichTrinhTuyen.png"
               classes={classes}
+              actionClick={() => clickAction('routeScheduleSummaryReport')}
             />
             <Item
               title={t('monthlyRouteScheduleSummaryReport')}
               icon="/images/s_icon_baoCaoTHLichTrinhTuyen.png"
               classes={classes}
+              actionClick={() => clickAction('monthlyRouteScheduleSummaryReport')}
             />
           </List>
         </OneReport>
@@ -198,11 +211,13 @@ const LayoutReportMenu = ({ isGTVT }) => {
               title={t('engineReport')}
               icon="/images/default_car.png"
               classes={classes}
+              actionClick={() => clickAction('engineReport')}
             />
             <Item
               title={t('engineStatusReport')}
               icon="/images/default_car.png"
               classes={classes}
+              actionClick={() => clickAction('engineStatusReport')}
             />
           </List>
         </OneReport>
@@ -216,11 +231,13 @@ const LayoutReportMenu = ({ isGTVT }) => {
               title={t('pulseErrorReport')}
               icon="/images/bc_LoiXung.png"
               classes={classes}
+              actionClick={() => clickAction('pulseErrorReport')}
             />
             <Item
               title={t('reportLostSignal')}
               icon="/images/s_icon_baoCaoMatGPS.png"
               classes={classes}
+              actionClick={() => clickAction('reportLostSignal')}
             />
           </List>
         </OneReport>
@@ -231,7 +248,7 @@ const LayoutReportMenu = ({ isGTVT }) => {
   return (
     <div className={classes.menu}>
       <OneReport
-        handle={handleClick}
+        handle={handleReportTT73GTVT}
         open={open}
         title={t('reportTT73GTVT')}
         classes={classes}>
@@ -240,41 +257,49 @@ const LayoutReportMenu = ({ isGTVT }) => {
             title={t('vehicleRoute')}
             icon="/images/s_baoCaoHanhTriNh.png"
             classes={classes}
+            actionClick={() => clickAction('vehicleRoute')}
           />
           <Item
             title={t('vehicleSpeed')}
             icon="/images/s_icon_baoCaoQuaTocDo.png"
             classes={classes}
+            actionClick={() => clickAction('vehicleSpeed')}
           />
           <Item
             title={t('exceedingSpeed​​Limit')}
             icon="/images/s_icon_baoCaoQuaTocDo.png"
             classes={classes}
+            actionClick={() => clickAction('exceedingSpeed​​Limit')}
           />
           <Item
             title={t('continuousDrivingTime')}
             icon="/images/s_icon_baoCaoTGLXLT_Ngay.png"
             classes={classes}
+            actionClick={() => clickAction('continuousDrivingTime')}
           />
           <Item
             title={t('stoppingReport')}
             icon="/images/s_icon_baoCaoDungDo.png"
             classes={classes}
+            actionClick={() => clickAction('stoppingReport')}
           />
           <Item
             title={t('vehicleSummaryReport')}
             icon="/images/s_icon_baoCaoTongHop.png"
             classes={classes}
+            actionClick={() => clickAction('vehicleSummaryReport')}
           />
           <Item
             title={t('driverSummaryReport')}
             icon="/images/s_icon_baoCaoTongHop.png"
             classes={classes}
+            actionClick={() => clickAction('driverSummaryReport')}
           />
           <Item
             title={t('drivingTimeReportfortheDay')}
             icon="/images/s_icon_baoCaoTGLXLT_Ngay.png"
             classes={classes}
+            actionClick={() => clickAction('drivingTimeReportfortheDay')}
           />
         </List>
       </OneReport>
