@@ -15,7 +15,7 @@ import DrivingTimeReportForTheDay from './components/DrivingTimeReportForTheDay'
 
 const GTVTReport = () => {
   const classes = useReportStyles();
-  const [reportType, setReportType] = useState(null);
+  const [reportType, setReportType] = useState('vehicleRoute');
 
   const actionClick = (selectedReportType) => {
     setReportType(selectedReportType);
@@ -45,7 +45,7 @@ const GTVTReport = () => {
   };
 
   return (
-    <PageLayoutReport menu={<LayoutReportMenu isGTVT={true} clickAction={actionClick} />} breadcrumbs={['reportTitle', 'reportEvents']}>
+    <PageLayoutReport menu={<LayoutReportMenu isGTVT clickAction={actionClick} />} breadcrumbs={['reportTitle', 'reportEvents']}>
       <div className={classes.container}>
         {renderReport()}
       </div>
