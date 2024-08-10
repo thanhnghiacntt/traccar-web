@@ -71,6 +71,7 @@ const LayoutReportMenu = ({ isGTVT, clickAction }) => {
   const [isScheduleReport, setIsScheduleReport] = useState(true);
   const [isEngineReport, setIsEngineReport] = useState(true);
   const [isSystemReport, setIsSystemReport] = useState(true);
+  const [isFuelReport, setIsFuelReport] = useState(true);
 
   const handleReportTT73GTVT = () => {
     setOpen(!open);
@@ -94,6 +95,10 @@ const LayoutReportMenu = ({ isGTVT, clickAction }) => {
 
   const handleEngineReport = () => {
     setIsEngineReport(!isEngineReport);
+  };
+
+  const handleFuelReport = () => {
+    setIsFuelReport(!isFuelReport);
   };
 
   if (!isGTVT) {
@@ -300,6 +305,26 @@ const LayoutReportMenu = ({ isGTVT, clickAction }) => {
             icon="/images/s_icon_baoCaoTGLXLT_Ngay.png"
             classes={classes}
             actionClick={() => clickAction('drivingTimeReportfortheDay')}
+          />
+        </List>
+      </OneReport>
+      <OneReport
+        handle={handleFuelReport}
+        open={isFuelReport}
+        title={t('fuelReport')}
+        classes={classes}>
+        <List component="div" disablePadding>
+          <Item
+            title={t('fuelReport')}
+            icon="/images/s_baoCaoHanhTriNh.png"
+            classes={classes}
+            actionClick={() => clickAction('fuelReport')}
+          />
+          <Item
+            title={t('fuelChart')}
+            icon="/images/s_icon_baoCaoQuaTocDo.png"
+            classes={classes}
+            actionClick={() => clickAction('fuelChart')}
           />
         </List>
       </OneReport>

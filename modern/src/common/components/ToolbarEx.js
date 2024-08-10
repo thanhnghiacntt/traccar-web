@@ -88,13 +88,14 @@ const useStyles = makeStyles((theme) => ({
   tabMenu: {
     pointerEvents: 'none',
     display: 'flex',
+    maxWidth: 1500,
     flexDirection: 'column',
     [theme.breakpoints.up('md')]: {
       position: 'fixed',
       left: 360,
       top: 0,
       flex: 1,
-      width: '60%',
+      width: '100%',
       margin: theme.spacing(0),
       zIndex: 7,
     },
