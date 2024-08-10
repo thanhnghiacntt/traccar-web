@@ -19,7 +19,6 @@ import MainToolbar from './MainToolbar';
 import MainMap from './MainMap';
 
 import { useAttributePreference } from '../common/util/preferences';
-import ToolbarEx from '../common/components/ToolbarEx';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -103,7 +102,7 @@ const MainPage = () => {
   useEffect(() => {
     // document.head.innerHTML += '<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">';
     const script = document.createElement('script');
-    script.src = `http://${process.env.REACT_APP_VIDEO_AUTH_URL}/808gps/open/player/js/cmsv6player.min.js`;
+    script.src = '/cmsv6player.min.js';
     script.async = true;
     document.body.appendChild(script);
     return () => {
@@ -164,7 +163,6 @@ const MainPage = () => {
         )}
       </div>
       <EventsDrawer open={eventsOpen} onClose={() => setEventsOpen(false)} />
-      <ToolbarEx />
       {selectedDeviceId && !showCameraId && (
         <StatusCard
           deviceId={selectedDeviceId}

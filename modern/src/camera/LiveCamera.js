@@ -74,7 +74,7 @@ const LiveCamera = () => {
     // document.head.innerHTML += '<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">';
     const script = document.createElement('script');
 
-    script.src = 'http://112.213.85.66:88/808gps/open/player/js/cmsv6player.min.js';
+    script.src = '/cmsv6player.min.js';
     script.async = true;
 
     document.body.appendChild(script);
@@ -172,7 +172,7 @@ const LiveCamera = () => {
         <Drawer
           anchor={isPhone ? 'bottom' : 'left'}
           variant="permanent"
-          style={{ 'margin-right': '40px' }}
+          style={{ marginRight: '40px' }}
           classes={{ paper: classes.drawerPaper }}
         >
           <Toolbar>

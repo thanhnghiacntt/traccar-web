@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Table, TableBody, TextField, TableHead, TableRow, TableCell, Button, Select, MenuItem, Box } from '@mui/material';
+import { Container, Table, TableBody, TextField, TableHead, TableRow, TableCell, Button, Select, MenuItem, Box, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
 import makeStyles from '@mui/styles/makeStyles';
@@ -7,6 +7,7 @@ import { useTheme } from '@mui/material/styles';
 import { blue } from '@mui/material/colors';
 import { reportsActions } from '../../store';
 import { useTranslation } from '../../common/components/LocalizationProvider';
+import Geocode from './Geocode';
 // import { FormControl } from 'react-bootstrap';
 
 const useStyles = makeStyles((theme) => ({
@@ -53,13 +54,39 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   tdStyle: {
+    border: 'none',
+    textAlign: 'center',
+  },
+  cell: {
+    border: `1px solid ${theme.palette.divider}`,
+    textAlign: 'center',
+    padding: theme.spacing(1),
+  },
+  cellHeader: {
+    border: '1px solid #9F9F9F',
+    textAlign: 'center',
+    padding: theme.spacing(1),
+    background: '#DCDCDC',
+  },
+  rowHover: {
+    '&:hover': {
+      backgroundColor: theme.palette.action.hover,
+    },
+  },
+  headerMain: {
+    backgroundColor: '#00A9A5',
+    color: 'White',
+    fontSize: 12,
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
+    lineHeight: '20px',
   },
 }));
 
 const VehicleRoute = () => {
   const [fromTime, setFromTime] = React.useState('00:00');
   const [fromDate, setFromDate] = React.useState(moment().format('YYYY-MM-DD'));
-  const [toTime, setToTime] = React.useState('00:00');
+  const [toTime, setToTime] = React.useState(moment().format('HH:mm'));
   const [toDate, setToDate] = React.useState(moment().format('YYYY-MM-DD'));
   const [vehicles, setVehicles] = useState([]); // State để lưu danh sách xe
   const [vehicle, setVehicle] = useState(vehicles.length > 0 ? vehicles[0] : null);
@@ -102,25 +129,27 @@ const VehicleRoute = () => {
     <Table>
       <TableHead>
         <TableRow>
-          <TableCell align="center" style={{ fontWeight: 'bold', whiteSpace: 'nowrap' }}>Số Thứ Tự</TableCell>
-          <TableCell align="center" style={{ fontWeight: 'bold', whiteSpace: 'nowrap' }}>Thời điểm</TableCell>
-          <TableCell align="center" style={{ fontWeight: 'bold', whiteSpace: 'nowrap' }}>Toạ độ</TableCell>
-          <TableCell align="center" style={{ fontWeight: 'bold', whiteSpace: 'nowrap' }}>Tốc độ</TableCell>
-          <TableCell align="center" style={{ fontWeight: 'bold', whiteSpace: 'nowrap' }}>Địa điểm</TableCell>
+          {['Số Thứ Tự', 'Thời điểm', 'Toạ độ', 'Tốc độ', 'Địa điểm'].map((text) => (
+            <TableCell align="center" className={classes.cellHeader} key={text}>
+              {text}
+            </TableCell>
+          ))}
         </TableRow>
       </TableHead>
       <TableBody>
         {data.map((row, index) => (
-          <TableRow key={row.id}>
-            <TableCell align="center">{index + 1}</TableCell>
-            <TableCell align="center">{row.serverTime}</TableCell>
-            <TableCell align="center">
-              {`${row.latitude},${row.longitude}`}
+          <TableRow key={row.id} className={classes.rowHover}>
+            <TableCell align="center" className={classes.cell}>{index + 1}</TableCell>
+            <TableCell align="center" className={classes.cell}>{moment(row.serverTime).format('HH:mm:ss DD/MM/YYYY')}</TableCell>
+            <TableCell align="center" className={classes.cell}>
+              {row.location}
             </TableCell>
-            <TableCell align="center" style={{ whiteSpace: 'nowrap' }}>
+            <TableCell align="center" className={classes.cell}>
               {`${row.speed} km/h`}
             </TableCell>
-            <TableCell align="center">{row.GhiChu}</TableCell>
+            <TableCell align="center" className={classes.cell}>
+              <Geocode latitude={row.latitude} longitude={row.longitude} />
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>
@@ -140,7 +169,16 @@ const VehicleRoute = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        setResult(data);
+        // Thêm thuộc tính location vào mỗi phần tử trong data
+        const updatedData = () => data.map((item) => {
+          const latitude = parseFloat(item.latitude).toFixed(7);
+          const longitude = parseFloat(item.longitude).toFixed(7);
+          return {
+            ...item,
+            location: `${latitude},${longitude}`,
+          };
+        });
+        setResult(updatedData);
       })
       .catch((error) => console.error('Error fetching search results:', error));
   };
@@ -150,7 +188,7 @@ const VehicleRoute = () => {
       <Table className={classes.tableStyle}>
         <TableHead className={classes.header}>
           <TableRow>
-            <TableCell>{t('vehicleRoute')}</TableCell>
+            <TableCell className={classes.headerMain}>{t('vehicleRoute')}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -195,7 +233,7 @@ const VehicleRoute = () => {
                                 </TableBody>
                               </Table>
                             </TableCell>
-                            <TableCell>
+                            <TableCell className={classes.tdStyle}>
                               <Table className={classes.tableStyle}>
                                 <TableBody>
                                   <TableRow>
@@ -269,22 +307,29 @@ const VehicleRoute = () => {
               </Table>
             </TableCell>
           </TableRow>
-          <TableRow>
-            <TableCell>
-              {result && result.length > 0 ? (
-                resultsTable(result)
-              ) : (
+          {result && result.length > 0 ? (
+            <TableRow>
+              <TableCell>
+                {resultsTable(result)}
+              </TableCell>
+            </TableRow>
+          ) : (
+            <TableRow>
+              <TableCell>
                 <Box
-                  component="img"
-                  src="/images/s_icon_camera.png"
-                  alt="No Image"
-                  sx={{
-                    marginBottom: '10px',
-                  }}
-                />
-              )}
-            </TableCell>
-          </TableRow>
+                  sx={{ display: 'flex', alignItems: 'center', marginBottom: '50px' }}
+                >
+                  <Box
+                    component="img"
+                    src="/images/s_icon_camera.png"
+                    alt="No Image"
+                    sx={{ marginRight: '8px' }}
+                  />
+                  <Typography variant="body2">Không có dữ liệu</Typography>
+                </Box>
+              </TableCell>
+            </TableRow>
+          )}
         </TableBody>
       </Table>
     </Container>

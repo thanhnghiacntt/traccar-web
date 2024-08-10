@@ -91,10 +91,11 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 1500,
     flexDirection: 'column',
     [theme.breakpoints.up('md')]: {
-      position: 'fixed',
+      position: 'relative',
       left: 360,
       top: 0,
       flex: 1,
+      height: '5px',
       width: '100%',
       margin: theme.spacing(0),
       zIndex: 7,
