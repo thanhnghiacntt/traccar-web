@@ -733,5 +733,10 @@
     "reportLostSignal":"Báo cáo mất tín hiệu",
     "fuelReport":"Báo cáo nhiên liệu",
     "fuelChart":"Biểu đồ nhiên liệu",
-    "licensePlates":"Biển số"
+    "licensePlates":"Biển số",
+    "order": "Số Thứ Tự",
+    "time": "Thời điểm",
+    "coordinates": "Toạ độ",
+    "address": "Địa điểm",
+    "noData": "Không có dữ liệu"
 }
