@@ -277,7 +277,7 @@ const ToolbarEx = () => {
                 onClick={() => handleSelection('comreport')}
                 variant="text"
                 size="small"
-                className={location.pathname === '/reports/route' ? classes.linkButtonActive : classes.linkButton}>
+                className={location.pathname.indexOf('/reports/') > -1 ? classes.linkButtonActive : classes.linkButton}>
                 {t('toobarExComReport')}
               </Button>
             </ListItem>

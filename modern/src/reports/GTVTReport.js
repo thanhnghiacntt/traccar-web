@@ -24,9 +24,9 @@ const GTVTReport = () => {
   const renderReport = () => {
     switch (reportType) {
       case 'vehicleRoute':
-        return <VehicleRoute />;
+        return <VehicleRoute keyTitle="vehicleRoute" />;
       case 'vehicleSpeed':
-        return <VehicleSpeed />;
+        return <VehicleSpeed keyTitle="vehicleSpeed" />;
       case 'stoppingReport':
         return <StoppingReport />;
       case 'driverSummaryReport':
@@ -34,9 +34,9 @@ const GTVTReport = () => {
       case 'vehicleSummaryReport':
         return <VehicleSummaryReport />;
       case 'exceedingSpeedLimit':
-        return <ExceedingSpeedLimit />;
+        return <ExceedingSpeedLimit keyTitle="exceedingSpeedLimit" />;
       case 'continuousDrivingTime':
-        return <ContinuousDrivingTime />;
+        return <ContinuousDrivingTime keyTitle="continuousDrivingTime" />;
       case 'drivingTimeReportfortheDay':
         return <DrivingTimeReportForTheDay />;
       default:

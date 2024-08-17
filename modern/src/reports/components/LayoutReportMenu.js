@@ -271,10 +271,10 @@ const LayoutReportMenu = ({ isGTVT, clickAction }) => {
             actionClick={() => clickAction('vehicleSpeed')}
           />
           <Item
-            title={t('exceedingSpeed​​Limit')}
+            title={t('exceedingSpeedLimit')}
             icon="/images/s_icon_baoCaoQuaTocDo.png"
             classes={classes}
-            actionClick={() => clickAction('exceedingSpeed​​Limit')}
+            actionClick={() => clickAction('exceedingSpeedLimit')}
           />
           <Item
             title={t('continuousDrivingTime')}
