@@ -7,6 +7,10 @@ import { useTheme } from '@mui/material/styles';
 import { blue } from '@mui/material/colors';
 import { reportsActions } from '../../store';
 import { useTranslation } from '../../common/components/LocalizationProvider';
+import { useAttributePreference, usePreference } from '../../common/util/preferences';
+import {
+  formatDistance, formatSpeed, formatHours, formatVolume, formatTime,
+} from '../../common/util/formatter';
 // import Geocode from './Geocode';
 // import { FormControl } from 'react-bootstrap';
 
@@ -92,7 +96,11 @@ const ContinuousDrivingTime = ({ keyTitle }) => {
   const [vehicle, setVehicle] = useState(vehicles.length > 0 ? vehicles[0] : null);
   const [result, setResult] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const list = ['order', 'distance', 'averageSpeed', 'maxSpeed', 'spentFuel', 'startOdometer', 'endOdometer', 'startLocation', 'endLocation', 'duration', 'startAddress', 'endAddress'];
+  const distanceUnit = useAttributePreference('distanceUnit');
+  const speedUnit = useAttributePreference('speedUnit');
+  const volumeUnit = useAttributePreference('volumeUnit');
+  const hours12 = usePreference('twelveHourFormat');
+  const list = ['order', 'distance', 'averageSpeed', 'maxSpeed', 'spentFuel', 'startTime', 'endTime', 'duration'];
 
   const t = useTranslation();
   const dispatch = useDispatch();
@@ -147,17 +155,13 @@ const ContinuousDrivingTime = ({ keyTitle }) => {
         {data.map((row, index) => (
           <TableRow className={classes.rowHover} key={`${index + 1}`}>
             <TableCell align="center" className={classes.cell}>{index + 1}</TableCell>
-            <TableCell align="center" className={classes.cell}>{row.distance}</TableCell>
-            <TableCell align="center" className={classes.cell}>{row.averageSpeed}</TableCell>
-            <TableCell align="center" className={classes.cell}>{row.maxSpeed}</TableCell>
-            <TableCell align="center" className={classes.cell}>{row.spentFuel}</TableCell>
-            <TableCell align="center" className={classes.cell}>{row.startOdometer}</TableCell>
-            <TableCell align="center" className={classes.cell}>{row.endOdometer}</TableCell>
-            <TableCell align="center" className={classes.cell}>{row.startLocation}</TableCell>
-            <TableCell align="center" className={classes.cell}>{row.endLocation}</TableCell>
-            <TableCell align="center" className={classes.cell}>{row.duration}</TableCell>
-            <TableCell align="center" className={classes.cell}>{row.startAddress}</TableCell>
-            <TableCell align="center" className={classes.cell}>{row.endAddress}</TableCell>
+            <TableCell align="center" className={classes.cell}>{formatDistance(row.distance, distanceUnit, t)}</TableCell>
+            <TableCell align="center" className={classes.cell}>{formatSpeed(row.averageSpeed, speedUnit, t)}</TableCell>
+            <TableCell align="center" className={classes.cell}>{formatSpeed(row.maxSpeed, speedUnit, t)}</TableCell>
+            <TableCell align="center" className={classes.cell}>{formatVolume(row.spentFuel, volumeUnit, t)}</TableCell>
+            <TableCell align="center" className={classes.cell}>{formatTime(row.startTime, 'minutes', hours12)}</TableCell>
+            <TableCell align="center" className={classes.cell}>{formatTime(row.endTime, 'minutes', hours12)}</TableCell>
+            <TableCell align="center" className={classes.cell}>{formatHours(row.duration)}</TableCell>
           </TableRow>
         ))}
       </TableBody>
@@ -178,14 +182,10 @@ const ContinuousDrivingTime = ({ keyTitle }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        const time = t('sharedMinutes');
         const updatedData = data.map((element) => ({
           ...element,
           startLocation: `${element.startLat.toFixed(7)},${element.startLon.toFixed(7)}`,
           endLocation: `${element.endLat.toFixed(7)},${element.endLon.toFixed(7)}`,
-          averageSpeed: `${element.averageSpeed.toFixed(2)}`,
-          distance: `${(element.distance / 1000).toFixed(2)} km`,
-          duration: `${(element.duration / 60000).toFixed(2)} ${time}`,
         }));
         setResult(updatedData);
         setIsLoading(false);

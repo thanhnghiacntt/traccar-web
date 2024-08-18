@@ -750,12 +750,15 @@
     "distance": "Khoảng cách",
     "averageSpeed": "Vận tốc trung bình",
     "maxSpeed": "Vận tốc tối đa",
-    "spentFuel": "Nhiên liệu sử dụng",
-    "startOdometer": "Đồng hồ lúc bắt đầu",
-    "endOdometer": "Đồng hồ lúc kết thúc",
+    "spentFuel": "Tiêu thụ nhiên liệu",
+    "startOdometer": "Công tơ mét đầu",
+    "endOdometer": "Công tơ mét cuối",
     "startLocation": "Tọa độ bắt đầu",
     "endLocation": "Tọa độ kết thúc",
     "duration": "Khoảng thời gian",
     "startAddress": "Địa chỉ bắt đầu",
-    "endAddress": "Địa chỉ kết thúc"
+    "endAddress": "Địa chỉ kết thúc",
+    "startTime": "Thời gian bắt đầu",
+    "endTime": "Thời gian kết thúc",
+    "engineHours": "Thời gian nổ máy"
 }

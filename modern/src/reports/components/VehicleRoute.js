@@ -151,7 +151,7 @@ const VehicleRoute = ({ keyTitle }) => {
               {row.location}
             </TableCell>
             <TableCell align="center" className={classes.cell}>
-              {`${row.speed} km/h`}
+              {`${row.speed} ${t('sharedKmh')}`}
             </TableCell>
             <TableCell align="center" className={classes.cell}>
               <Geocode latitude={row.latitude} longitude={row.longitude} />
@@ -204,7 +204,7 @@ const VehicleRoute = ({ keyTitle }) => {
         <Table className={classes.tableStyle}>
           <TableHead className={classes.header}>
             <TableRow>
-              <TableCell className={classes.headerMain}>{t('vehicleRoute')}</TableCell>
+              <TableCell className={classes.headerMain}>{t(keyTitle)}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
