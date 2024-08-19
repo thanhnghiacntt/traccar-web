@@ -30,9 +30,9 @@ const GTVTReport = () => {
       case 'stoppingReport':
         return <StoppingReport keyTitle="stoppingReport" />;
       case 'driverSummaryReport':
-        return <DriverSummaryReport />;
+        return <DriverSummaryReport keyTitle="driverSummaryReport" />;
       case 'vehicleSummaryReport':
-        return <VehicleSummaryReport />;
+        return <VehicleSummaryReport keyTitle="vehicleSummaryReport" />;
       case 'exceedingSpeedLimit':
         return <ExceedingSpeedLimit keyTitle="exceedingSpeedLimit" />;
       case 'continuousDrivingTime':
