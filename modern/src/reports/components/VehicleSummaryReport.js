@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import moment from 'moment';
-import { Container, Table, TableBody, TableHead, TableRow, TableCell, Button, Select, MenuItem, Box, Typography, CircularProgress } from '@mui/material';
+import { Container, Table, TableBody, TableHead, TableRow, TableCell, Button, Box, Typography, CircularProgress } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import { useTheme } from '@mui/material/styles';
 import { blue } from '@mui/material/colors';
@@ -10,6 +10,7 @@ import {
   formatDistance, formatHours, formatVolume, formatTime,
 } from '../../common/util/formatter';
 import DateTimeCustom from './DateTimeCustom';
+import LicensePlates from './LicensePlates';
 // import Geocode from './Geocode';
 // import { FormControl } from 'react-bootstrap';
 
@@ -91,8 +92,7 @@ const VehicleSummaryReport = ({ keyTitle }) => {
   const [toDateTime, setToDateTime] = React.useState(date.toISOString());
   date.setHours(0, 0, 0, 0);
   const [fromDateTime, setFromDateTime] = React.useState(date.toISOString());
-  const [vehicles, setVehicles] = useState([]); // State để lưu danh sách xe
-  const [vehicle, setVehicle] = useState(vehicles.length > 0 ? vehicles[0] : null);
+  const [vehicle, setVehicle] = useState(null);
   const [result, setResult] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const distanceUnit = useAttributePreference('distanceUnit');
@@ -103,29 +103,6 @@ const VehicleSummaryReport = ({ keyTitle }) => {
   const t = useTranslation();
   const theme = useTheme();
   const classes = useStyles(theme);
-
-  // useEffect để gọi API và lấy danh sách xe
-  useEffect(() => {
-    setIsLoading(true); // Bắt đầu tải
-    fetch('/api/devices')
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.length > 0) {
-          setVehicle(data[0]);
-        }
-        setVehicles(data);
-        setIsLoading(false); // Bắt đầu tải
-      })
-      .catch((error) => {
-        console.error('Error fetching vehicles:', error);
-        setIsLoading(false); // Bắt đầu tải
-      });
-  }, []);
-
-  const changeSelect = (e) => {
-    const selectedVehicle = vehicles.find((vehicle) => vehicle.name === e.target.value);
-    setVehicle(selectedVehicle);
-  };
 
   const resultsTable = (data) => (
     <Table>
@@ -209,30 +186,7 @@ const VehicleSummaryReport = ({ keyTitle }) => {
                             </TableRow>
                             <TableRow>
                               <TableCell className={classes.tdStyle}>
-                                <Table className={classes.tableStyle}>
-                                  <TableBody>
-                                    <TableRow>
-                                      <TableCell className={classes.tdStyle} style={{ width: '90px' }}>
-                                        {t('licensePlates')}
-                                        :
-                                      </TableCell>
-                                      <TableCell className={classes.tdStyle}>
-                                        <Select
-                                          value={vehicle ? vehicle.name : ''}
-                                          onChange={(e) => changeSelect(e)}
-                                          className={classes.selectIcon}
-                                          displayEmpty
-                                        >
-                                          {vehicles.map((vehicle) => (
-                                            <MenuItem key={vehicle.id} value={vehicle.name}>
-                                              {vehicle.name}
-                                            </MenuItem>
-                                          ))}
-                                        </Select>
-                                      </TableCell>
-                                    </TableRow>
-                                  </TableBody>
-                                </Table>
+                                <LicensePlates actionChange={(vehicle) => setVehicle(vehicle)} />
                               </TableCell>
                               <TableCell className={classes.tdStyle}>
                                 <Button variant="contained" color="primary" name={t('sharedSearch')} className={classes.btnPrimary} onClick={handleSearch}>
