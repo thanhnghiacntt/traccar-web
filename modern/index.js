@@ -13,6 +13,8 @@ app.get('/', (req, res) => {
   console.log(res);
 });
 
-app.listen(3000, () => {
-  console.log('Express serving on 3000!');
+// Sử dụng biến môi trường để xác định port
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Express serving on ${port}!`);
 });

@@ -79,7 +79,7 @@ const SettingsMenu = () => {
             />
             <MenuItem
               title={t('sharedGeofences')}
-              link="/geofences"
+              link="/settings/geofences"
               icon={<CreateIcon />}
               selected={location.pathname.startsWith('/settings/geofence')}
             />
@@ -171,7 +171,7 @@ const SettingsMenu = () => {
             {admin && (
               <MenuItem
                 title={t('sysTollstation')}
-                link="/tollstations"
+                link="/settings/tollstations"
                 icon={<AddRoadIcon />}
                 selected={location.pathname.startsWith('/settings/tollstation')}
               />

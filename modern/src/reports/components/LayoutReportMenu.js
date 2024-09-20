@@ -260,7 +260,7 @@ const LayoutReportMenu = ({ isGTVT, clickAction }) => {
         <List component="div" disablePadding>
           <Item
             title={t('vehicleRoute')}
-            icon="/images/s_baoCaoHanhTriNh.png"
+            icon="/images/s_baoCaoHanhTrinh.png"
             classes={classes}
             actionClick={() => clickAction('vehicleRoute')}
           />
@@ -316,7 +316,7 @@ const LayoutReportMenu = ({ isGTVT, clickAction }) => {
         <List component="div" disablePadding>
           <Item
             title={t('fuelReport')}
-            icon="/images/s_baoCaoHanhTriNh.png"
+            icon="/images/s_baoCaoHanhTrinh.png"
             classes={classes}
             actionClick={() => clickAction('fuelReport')}
           />

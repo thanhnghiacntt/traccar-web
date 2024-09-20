@@ -44,39 +44,35 @@ const LicensePlates = ({ actionChange, lable }) => {
     const selectedVehicle = vehicles.find((vehicle) => vehicle.name === e.target.value);
     actionChange(selectedVehicle);
   };
-  return (
-    <div>
-      {isLoading ? (
-        <Box sx={{ display: 'flex', position: 'fixed', width: '70%', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-          <CircularProgress size={60} />
-        </Box>
-      ) : (
-        <Table className={classes.tableStyle}>
-          <TableBody>
-            <TableRow>
-              <TableCell className={classes.tdStyle}>
-                {t(lable)}
-                :
-              </TableCell>
-              <TableCell className={classes.tdStyle}>
-                <Select
-                  value={vehicle ? vehicle.name : ''}
-                  onChange={(e) => changeSelect(e)}
-                  className={classes.selectIcon}
-                  displayEmpty
-                  >
-                  {vehicles.map((vehicle) => (
-                    <MenuItem key={vehicle.id} value={vehicle.name}>
-                      {vehicle.name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      )}
-    </div>
+  return isLoading ? (
+    <Box sx={{ display: 'flex', position: 'fixed', width: '70%', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+      <CircularProgress size={60} />
+    </Box>
+  ) : (
+    <Table className={classes.tableStyle}>
+      <TableBody>
+        <TableRow>
+          <TableCell className={classes.tdStyle}>
+            {t(lable)}
+            :
+          </TableCell>
+          <TableCell className={classes.tdStyle}>
+            <Select
+              value={vehicle ? vehicle.name : ''}
+              onChange={(e) => changeSelect(e)}
+              className={classes.selectIcon}
+              displayEmpty
+              >
+              {vehicles.map((vehicle) => (
+                <MenuItem key={vehicle.id} value={vehicle.name}>
+                  {vehicle.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
   );
 };
 

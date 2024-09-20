@@ -85,7 +85,7 @@ const PositionStopValue = ({ position, property, attribute }) => {
       return (<AddressValue latitude={position.latitude} longitude={position.longitude} originalAddress={value} />);
     case 'network':
       if (value) {
-        return (<Link component={RouterLink} underline="none" to={`/network/${position.id}`}>{t('sharedInfoTitle')}</Link>);
+        return (<Link component={RouterLink} underline="none" to={`/settings/network/${position.id}`}>{t('sharedInfoTitle')}</Link>);
       }
       return '';
     default:

@@ -105,7 +105,7 @@ const Navigation = () => {
       navigate('/');
     } else if (query.get('eventId')) {
       const eventId = parseInt(query.get('eventId'), 10);
-      navigate(`/event/${eventId}`);
+      navigate(`/settings/event/${eventId}`);
     } else {
       setRedirectsHandled(true);
     }
@@ -122,16 +122,14 @@ const Navigation = () => {
       <Route path="/change-server" element={<ChangeServerPage />} />
       <Route path="/" element={<App />}>
         <Route index element={<MainPage />} />
-
-        <Route path="position/:id" element={<PositionPage />} />
-        <Route path="network/:positionId" element={<NetworkPage />} />
-        <Route path="event/:id" element={<EventPage />} />
-        <Route path="replay" element={<ReplayPage />} />
-        <Route path="geofences" element={<GeofencesPage />} />
-        <Route path="tollstations" element={<TollstationsMapPage />} />
         <Route path="livecamera" element={<LiveCamera />} />
-
+        <Route path="replay" element={<ReplayPage />} />
         <Route path="settings">
+          <Route path="position/:id" element={<PositionPage />} />
+          <Route path="network/:positionId" element={<NetworkPage />} />
+          <Route path="event/:id" element={<EventPage />} />
+          <Route path="geofences" element={<GeofencesPage />} />
+          <Route path="tollstations" element={<TollstationsMapPage />} />
           <Route path="accumulators/:deviceId" element={<AccumulatorsPage />} />
           <Route path="calendars" element={<CalendarsPage />} />
           <Route path="calendar/:id" element={<CalendarPage />} />

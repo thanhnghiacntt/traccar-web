@@ -1,18 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import moment from 'moment';
-import { Container, Table, TableBody, TableHead, TableRow, TableCell, Button, Box, Typography, CircularProgress } from '@mui/material';
+import { Container, Table, TableBody, TableHead, TableRow, TableCell, Button, Box, Typography, CircularProgress, Select, MenuItem, TextField } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import { useTheme } from '@mui/material/styles';
 import { blue } from '@mui/material/colors';
 import { useTranslation } from '../../common/components/LocalizationProvider';
 import { useAttributePreference, usePreference } from '../../common/util/preferences';
 import {
-  formatDistance, formatHours, formatVolume, formatTime,
+  formatDistance, formatVolume, formatTime,
+  formatSpeed,
 } from '../../common/util/formatter';
-import DateTimeCustom from './DateTimeCustom';
-import LicensePlates from './LicensePlates';
-// import Geocode from './Geocode';
-// import { FormControl } from 'react-bootstrap';
+import { reportsActions } from '../../store';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -88,21 +87,42 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const VehicleSummaryReport = ({ keyTitle }) => {
-  const date = new Date();
-  const [toDateTime, setToDateTime] = React.useState(date.toISOString());
-  date.setHours(0, 0, 0, 0);
-  const [fromDateTime, setFromDateTime] = React.useState(date.toISOString());
-  const [vehicle, setVehicle] = useState(null);
+  const [fromTime, setFromTime] = React.useState('00:00');
+  const [fromDate, setFromDate] = React.useState(moment().format('YYYY-MM-DD'));
+  const [toTime, setToTime] = React.useState(moment().format('HH:mm'));
+  const [toDate, setToDate] = React.useState(moment().format('YYYY-MM-DD'));
+  const [vehicles, setVehicles] = useState([]); // State để lưu danh sách xe
+  const [vehicle, setVehicle] = useState(vehicles.length > 0 ? vehicles[0] : null);
   const [result, setResult] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const distanceUnit = useAttributePreference('distanceUnit');
+  const speedUnit = useAttributePreference('speedUnit');
   const volumeUnit = useAttributePreference('volumeUnit');
   const hours12 = usePreference('twelveHourFormat');
-  const list = ['order', 'startTime', 'endTime', 'startOdometer', 'endOdometer', 'driverAddress', 'duration', 'engineHours', 'spentFuel'];
+  const dispatch = useDispatch();
+  const list = ['order', 'startTime', 'endTime', 'startOdometer', 'endOdometer', 'averageSpeed', 'maxSpeed', 'distance', 'spentFuel'];
 
   const t = useTranslation();
   const theme = useTheme();
   const classes = useStyles(theme);
+
+  // useEffect để gọi API và lấy danh sách xe
+  useEffect(() => {
+    setIsLoading(true); // Bắt đầu tải
+    fetch('/api/devices')
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.length > 0) {
+          setVehicle(data[0]);
+        }
+        setVehicles(data);
+        setIsLoading(false); // Bắt đầu tải
+      })
+      .catch((error) => {
+        console.error('Error fetching vehicles:', error);
+        setIsLoading(false); // Bắt đầu tải
+      });
+  }, []);
 
   const resultsTable = (data) => (
     <Table>
@@ -123,9 +143,9 @@ const VehicleSummaryReport = ({ keyTitle }) => {
             <TableCell align="center" className={classes.cell}>{formatTime(row.endTime, 'minutes', hours12)}</TableCell>
             <TableCell align="center" className={classes.cell}>{formatDistance(row.startOdometer, distanceUnit, t)}</TableCell>
             <TableCell align="center" className={classes.cell}>{formatDistance(row.endOdometer, distanceUnit, t)}</TableCell>
-            <TableCell align="center" className={classes.cell}>{row.address}</TableCell>
-            <TableCell align="center" className={classes.cell}>{formatHours(row.duration)}</TableCell>
-            <TableCell align="center" className={classes.cell}>{formatHours(row.engineHours)}</TableCell>
+            <TableCell align="center" className={classes.cell}>{formatSpeed(row.averageSpeed, speedUnit, t)}</TableCell>
+            <TableCell align="center" className={classes.cell}>{formatSpeed(row.maxSpeed, speedUnit, t)}</TableCell>
+            <TableCell align="center" className={classes.cell}>{formatDistance(row.distance, distanceUnit, t)}</TableCell>
             <TableCell align="center" className={classes.cell}>{formatVolume(row.spentFuel, volumeUnit, t)}</TableCell>
           </TableRow>
         ))}
@@ -133,10 +153,27 @@ const VehicleSummaryReport = ({ keyTitle }) => {
     </Table>
   );
 
+  const handleFromDateTimeChange = (date, time) => {
+    const dateTime = moment(`${date} ${time}`, 'YYYY-MM-DD HH:mm').toISOString();
+    dispatch(reportsActions.updateFrom(dateTime));
+  };
+
+  const handleToDateTimeChange = (date, time) => {
+    const dateTime = moment(`${date} ${time}`, 'YYYY-MM-DD HH:mm').toISOString();
+    dispatch(reportsActions.updateTo(dateTime));
+  };
+
+  const changeSelect = (e) => {
+    const selectedVehicle = vehicles.find((vehicle) => vehicle.name === e.target.value);
+    setVehicle(selectedVehicle);
+  };
+
   const handleSearch = () => {
     setIsLoading(true); // Bắt đầu tải
     const vehicleId = vehicle.id; // Giả sử `vehicle` lưu ID của xe được chọn
-    fetch(`/api/reports/stops?type=deviceOverspeed&from=${fromDateTime}&to=${toDateTime}&deviceId=${vehicleId}`, {
+    const fromDateTime = moment(`${fromDate} ${fromTime}`, 'YYYY-MM-DD HH:mm').toISOString();
+    const toDateTime = moment(`${toDate} ${toTime}`, 'YYYY-MM-DD HH:mm').toISOString();
+    fetch(`/api/reports/summary?&daily=false&from=${fromDateTime}&to=${toDateTime}&deviceId=${vehicleId}`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -178,15 +215,96 @@ const VehicleSummaryReport = ({ keyTitle }) => {
                           <TableBody>
                             <TableRow>
                               <TableCell className={classes.tdStyle}>
-                                <DateTimeCustom actionChange={(value) => setFromDateTime(value)} lable="reportFrom" timeDefault="00:00" />
+                                <Table className={classes.tableStyle}>
+                                  <TableBody>
+                                    <TableRow>
+                                      <TableCell className={classes.tdStyle} style={{ width: '90px' }}>
+                                        {t('reportFrom')}
+                                        :
+                                      </TableCell>
+                                      <TableCell className={classes.tdStyle}>
+                                        <TextField
+                                          type="time"
+                                          value={fromTime}
+                                          onChange={(e) => {
+                                            setFromTime(e.target.value);
+                                            handleFromDateTimeChange(fromDate, e.target.value);
+                                          }}
+                                          fullWidth />
+                                      </TableCell>
+                                      <TableCell className={classes.tdStyle}>
+                                        <TextField
+                                          type="date"
+                                          value={fromDate}
+                                          onChange={(e) => {
+                                            setFromDate(moment(e.target.value).format('YYYY-MM-DD'));
+                                            handleFromDateTimeChange(e.target.value, fromTime);
+                                          }}
+                                          fullWidth />
+                                      </TableCell>
+                                    </TableRow>
+                                  </TableBody>
+                                </Table>
                               </TableCell>
                               <TableCell className={classes.tdStyle}>
-                                <DateTimeCustom actionChange={(value) => setToDateTime(value)} lable="reportTo" timeDefault={moment().format('HH:mm')} />
+                                <Table className={classes.tableStyle}>
+                                  <TableBody>
+                                    <TableRow>
+                                      <TableCell className={classes.tdStyle} style={{ width: '100px' }}>
+                                        {t('reportTo')}
+                                        :
+                                      </TableCell>
+                                      <TableCell className={classes.tdStyle}>
+                                        <TextField
+                                          type="time"
+                                          value={toTime}
+                                          onChange={(e) => {
+                                            setToTime(e.target.value);
+                                            handleToDateTimeChange(toDate, e.target.value);
+                                          }}
+                                          fullWidth />
+                                      </TableCell>
+                                      <TableCell className={classes.tdStyle}>
+                                        <TextField
+                                          type="date"
+                                          value={toDate}
+                                          onChange={(e) => {
+                                            setToDate(moment(e.target.value).format('YYYY-MM-DD'));
+                                            handleToDateTimeChange(e.target.value, toTime);
+                                          }}
+                                          fullWidth />
+                                      </TableCell>
+                                    </TableRow>
+                                  </TableBody>
+                                </Table>
                               </TableCell>
                             </TableRow>
                             <TableRow>
                               <TableCell className={classes.tdStyle}>
-                                <LicensePlates actionChange={(vehicle) => setVehicle(vehicle)} />
+                                <Table className={classes.tableStyle}>
+                                  <TableBody>
+                                    <TableRow>
+                                      <TableCell className={classes.tdStyle} style={{ width: '90px' }}>
+                                        {t('licensePlates')}
+                                        :
+                                      </TableCell>
+                                      <TableCell className={classes.tdStyle}>
+                                        <Select
+                                          value={vehicle ? vehicle.name : ''}
+                                          onChange={(e) => changeSelect(e)}
+                                          className={classes.selectIcon}
+                                          displayEmpty
+                                        >
+                                          {vehicles.map((vehicle) => (
+                                            <MenuItem key={vehicle.id} value={vehicle.name}>
+                                              {vehicle.name}
+                                            </MenuItem>
+                                          ))}
+                                        </Select>
+                                      </TableCell>
+                                    </TableRow>
+                                  </TableBody>
+                                </Table>
                               </TableCell>
                               <TableCell className={classes.tdStyle}>
                                 <Button variant="contained" color="primary" name={t('sharedSearch')} className={classes.btnPrimary} onClick={handleSearch}>

@@ -123,7 +123,9 @@ const ToolbarEx = () => {
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
-
+  const list = ['/reports/route', '/reports/combined', '/reports/event', '/reports/trip', '/reports/stop', '/reports/summary',
+    '/reports/chart', '/reports/cameravideo', '/reports/fuelsummary', '/reports/tollstation', '/reports/overspeed', '/reports/scheduled',
+    '/reports/statistics'];
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
@@ -210,6 +212,16 @@ const ToolbarEx = () => {
     setAnchorEl(null);
   };
 
+  const classAsctivate = (input) => {
+    if (location.pathname === input) {
+      return classes.linkButtonActive;
+    }
+    if (input != null && Array.isArray(input) && input.indexOf(location.pathname) > -1) {
+      return classes.linkButtonActive;
+    }
+    return classes.linkButton;
+  };
+
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
   return (
@@ -232,7 +244,7 @@ const ToolbarEx = () => {
                 onClick={() => handleSelection('map')}
                 variant="text"
                 size="small"
-                className={classes.linkButton}>
+                className={classAsctivate('/')}>
                 {t('toobarExMap')}
               </Button>
             </ListItem>
@@ -241,7 +253,7 @@ const ToolbarEx = () => {
                 onClick={() => handleSelection('camera')}
                 variant="text"
                 size="small"
-                className={location.pathname === '/livecamera' ? classes.linkButtonActive : classes.linkButton}>
+                className={classAsctivate('/livecamera')}>
                 {t('toobarExCamera')}
               </Button>
             </ListItem>
@@ -250,7 +262,7 @@ const ToolbarEx = () => {
                 onClick={() => handleSelection('reportsGTVT')}
                 variant="text"
                 size="small"
-                className={location.pathname === '/reports/gtvt' ? classes.linkButtonActive : classes.linkButton}>
+                className={classAsctivate('/reports/gtvt')}>
                 {t('toobarExReportGTVT')}
               </Button>
             </ListItem>
@@ -259,7 +271,7 @@ const ToolbarEx = () => {
                 onClick={() => handleSelection('reportsBusiness')}
                 variant="text"
                 size="small"
-                className={location.pathname === '/reports/business' ? classes.linkButtonActive : classes.linkButton}>
+                className={classAsctivate('/reports/business')}>
                 {t('toobarExReportBusiness')}
               </Button>
             </ListItem>
@@ -268,7 +280,7 @@ const ToolbarEx = () => {
                 onClick={() => handleSelection('history')}
                 variant="text"
                 size="small"
-                className={location.pathname === '/replay' ? classes.linkButtonActive : classes.linkButton}>
+                className={classAsctivate('/replay')}>
                 {t('toobarExHistory')}
               </Button>
             </ListItem>
@@ -277,7 +289,7 @@ const ToolbarEx = () => {
                 onClick={() => handleSelection('comreport')}
                 variant="text"
                 size="small"
-                className={location.pathname.indexOf('/reports/') > -1 ? classes.linkButtonActive : classes.linkButton}>
+                className={classAsctivate(list)}>
                 {t('toobarExComReport')}
               </Button>
             </ListItem>
@@ -286,7 +298,7 @@ const ToolbarEx = () => {
                 onClick={() => handleSelection('manager')}
                 variant="text"
                 size="small"
-                className={location.pathname === '/settings/preferences' ? classes.linkButtonActive : classes.linkButton}>
+                className={location.pathname.indexOf('/settings') > -1 ? classes.linkButtonActive : classes.linkButton}>
                 {t('toobarExManager')}
               </Button>
             </ListItem>

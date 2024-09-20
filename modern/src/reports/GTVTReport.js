@@ -38,7 +38,7 @@ const GTVTReport = () => {
       case 'continuousDrivingTime':
         return <ContinuousDrivingTime keyTitle="continuousDrivingTime" />;
       case 'drivingTimeReportfortheDay':
-        return <DrivingTimeReportForTheDay />;
+        return <DrivingTimeReportForTheDay keyTitle="drivingTimeReportfortheDay" />;
       default:
         return <div>Select a report type from the menu.</div>;
     }
