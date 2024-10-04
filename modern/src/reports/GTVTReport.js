@@ -39,6 +39,18 @@ const GTVTReport = () => {
         return <ContinuousDrivingTime keyTitle="continuousDrivingTime" />;
       case 'drivingTimeReportfortheDay':
         return <DrivingTimeReportForTheDay keyTitle="drivingTimeReportfortheDay" />;
+      case 'detailSpeedViolation':
+        return <DrivingTimeReportForTheDay keyTitle="detailSpeedViolation" />;
+      case 'statisticsSpeedViolationByProvince':
+        return <DrivingTimeReportForTheDay keyTitle="statisticsSpeedViolationByProvince" />;
+      case 'detailContinuousDrivingViolation4h':
+        return <DrivingTimeReportForTheDay keyTitle="detailContinuousDrivingViolation4h" />;
+      case 'detailContinuousDrivingViolation10h':
+        return <DrivingTimeReportForTheDay keyTitle="detailContinuousDrivingViolation10h" />;
+      case 'summaryProvinceViolation':
+        return <DrivingTimeReportForTheDay keyTitle="summaryProvinceViolation" />;
+      case 'detailDataTransmissionViolationByTransportCompany':
+        return <DrivingTimeReportForTheDay keyTitle="detailDataTransmissionViolationByTransportCompany" />;
       default:
         return <div>Select a report type from the menu.</div>;
     }

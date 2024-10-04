@@ -760,5 +760,12 @@
     "endAddress": "Địa chỉ kết thúc",
     "startTime": "Thời gian bắt đầu",
     "endTime": "Thời gian kết thúc",
-    "engineHours": "Thời gian nổ máy"
+    "engineHours": "Thời gian nổ máy",
+    "reportTT09GTVT": "Báo cáo TT09/2015/TT - BGTVT",
+    "detailSpeedViolation": "Chi tiết vi phạm tốc độ xe chạy",
+    "statisticsSpeedViolationByProvince": "Thống kê vi phạm về tốc độ theo đơn vị vận tải",
+    "detailContinuousDrivingViolation4h": "Chi tiết vi phạm thời gian lái xe liên tục (4 giờ)",
+    "detailContinuousDrivingViolation10h": "Chi tiết vi phạm thời gian lái xe liên tục trong ngày (10 giờ)",
+    "summaryProvinceViolation": "Tổng hợp tình hình vi phạm theo đơn vị vận tải",
+    "detailDataTransmissionViolationByTransportCompany": "Chi tiết vi phạm truyền dữ liệu theo đơn vị vận tải"    
 }

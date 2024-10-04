@@ -67,6 +67,7 @@ const LayoutReportMenu = ({ isGTVT, clickAction }) => {
   const t = useTranslation();
   const [open, setOpen] = useState(true);
   const [isSynthesisReport, setIsSynthesisReport] = useState(true);
+  const [isReportTT09GTVT, setIsReportTT09GTVT] = useState(true);
   const [isActivityReport, setIsActivityReport] = useState(true);
   const [isScheduleReport, setIsScheduleReport] = useState(true);
   const [isEngineReport, setIsEngineReport] = useState(true);
@@ -75,6 +76,10 @@ const LayoutReportMenu = ({ isGTVT, clickAction }) => {
 
   const handleReportTT73GTVT = () => {
     setOpen(!open);
+  };
+
+  const handleReportTT09GTVT = () => {
+    setIsReportTT09GTVT(!isReportTT09GTVT);
   };
 
   const handleSynthesisReport = () => {
@@ -252,6 +257,50 @@ const LayoutReportMenu = ({ isGTVT, clickAction }) => {
 
   return (
     <div className={classes.menu}>
+      <OneReport
+        handle={handleReportTT09GTVT}
+        open={isReportTT09GTVT}
+        title={t('reportTT09GTVT')}
+        classes={classes}>
+        <List component="div" disablePadding>
+          <Item
+            title={t('detailSpeedViolation')}
+            icon="/images/s_icon_baoCaoDungDo.png"
+            classes={classes}
+            actionClick={() => clickAction('detailSpeedViolation')}
+          />
+          <Item
+            title={t('statisticsSpeedViolationByProvince')}
+            icon="/images/s_icon_baoCaoDungDo.png"
+            classes={classes}
+            actionClick={() => clickAction('statisticsSpeedViolationByProvince')}
+          />
+          <Item
+            title={t('detailContinuousDrivingViolation4h')}
+            icon="/images/s_icon_baoCaoDungDo.png"
+            classes={classes}
+            actionClick={() => clickAction('detailContinuousDrivingViolation4h')}
+          />
+          <Item
+            title={t('detailContinuousDrivingViolation10h')}
+            icon="/images/s_icon_baoCaoDungDo.png"
+            classes={classes}
+            actionClick={() => clickAction('detailContinuousDrivingViolation10h')}
+          />
+          <Item
+            title={t('summaryProvinceViolation')}
+            icon="/images/s_icon_baoCaoDungDo.png"
+            classes={classes}
+            actionClick={() => clickAction('summaryProvinceViolation')}
+          />
+          <Item
+            title={t('detailDataTransmissionViolationByTransportCompany')}
+            icon="/images/s_icon_baoCaoDungDo.png"
+            classes={classes}
+            actionClick={() => clickAction('detailDataTransmissionViolationByTransportCompany')}
+          />
+        </List>
+      </OneReport>
       <OneReport
         handle={handleReportTT73GTVT}
         open={open}
